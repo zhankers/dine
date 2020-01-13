@@ -14,7 +14,8 @@ spring:
     hibernate:
       ddl-auto: update
 
-
+  freemarker:
+    suffix: .ftl
 
 #定义网址
 project-url:
