@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /sell
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 335100
+    url: jdbc:mysql://localhost/sell?useSSL=false&serverTimeZone=UTC&useOldAliasMetadataBehavior=true
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+
+
+#定义网址
+project-url:
+  sell: localhost:8080
+
