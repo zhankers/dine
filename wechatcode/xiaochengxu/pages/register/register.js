@@ -1,4 +1,5 @@
 // pages/register/register.js
+var app = getApp();
 Page({
 
   /**
@@ -62,6 +63,22 @@ Page({
       })
       return;
     }
+
+    wx.request({
+      url: app.globalData.baseUrl + '/user/register',
+      method: "POST",
+      data: {
+        username: zh,
+        password: mm,
+        confirmm: confirmm
+      },
+      success: function (res) {
+        console.log(res)
+      },
+
+
+
+    })
 
 
 

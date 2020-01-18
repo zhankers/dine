@@ -35,7 +35,15 @@ public class CommentController {
     @Autowired
     private OrderMasterRepository masterRepository;
 
-    //订单详情
+    /**
+     * 订单详情
+     * @param openid
+     * @param orderId
+     * @param name
+     * @param avatarUrl
+     * @param content
+     * @return
+     */
     @PostMapping("/comment")
     public ResultVO<Comment> detail(@RequestParam("openid") String openid,
                                     @RequestParam("orderId") String orderId,
@@ -62,14 +70,23 @@ public class CommentController {
         return ResultVOUtil.success(save);
     }
 
-    //所有评论
+    /**
+     * 所有评论
+     *
+     * @return
+     */
     @GetMapping("/commentList")
     public ResultVO<List<Comment>> commentList() {
         List<Comment> all = repository.findAll();
         return ResultVOUtil.success(all);
     }
 
-    //单个用户的所有评论
+    /**
+     * 单个用户的所有评论
+     *
+     * @param openid
+     * @return
+     */
     @GetMapping("/userCommentList")
     public ResultVO<List<Comment>> userCommentList(@RequestParam("openid") String openid) {
         List<Comment> all = repository.findAllByOpenid(openid);

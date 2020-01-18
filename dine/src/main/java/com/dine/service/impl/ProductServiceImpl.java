@@ -71,14 +71,12 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
         for (CartDTO cartDTO: cartDTOList) {
-
-            ProductInfo productInfo = new ProductInfo();
-            productInfo.setProductId(cartDTO.getProductId());
-            Optional<ProductInfo> opt = repository.findOne(Example.of(productInfo));
+            Optional<ProductInfo> opt = repository.findById(cartDTO.getProductId());
             if (!opt.isPresent()) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 
+            ProductInfo productInfo = opt.get();
             Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
             if (result < 0) {
                 throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);

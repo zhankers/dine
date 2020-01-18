@@ -68,13 +68,14 @@ public class OrderServiceImpl implements OrderService {
 
         //1. 查询商品（数量, 价格）
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
-            Optional<ProductInfo> productInfo = productService.findOne(orderDetail.getProductId());
-            if (!productInfo.isPresent()) {
+            Optional<ProductInfo> opt = productService.findOne(orderDetail.getProductId());
+            if (!opt.isPresent()) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
+            ProductInfo productInfo = opt.get();
 
             //2. 计算订单总价
-            orderAmount = productInfo.get().getProductPrice()
+            orderAmount = productInfo.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity()))
                     .add(orderAmount);
 
@@ -111,16 +112,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findOne(String orderId) {
-        OrderMaster orderMaster = new OrderMaster();
-        orderMaster.setOrderId(orderId);
-        Example<OrderMaster> example = Example.of(orderMaster);
-        Optional<OrderMaster> opt = orderMasterRepository.findOne(example);
+
+        Optional<OrderMaster> opt = orderMasterRepository.findById(orderId);
 
         // OrderMaster orderMaster = orderMasterRepository.getOne(orderId);
         if (!opt.isPresent()) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
-
+        OrderMaster orderMaster = opt.get();
         List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
         if (CollectionUtils.isEmpty(orderDetailList)) {
             throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);

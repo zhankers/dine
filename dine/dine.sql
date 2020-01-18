@@ -1,7 +1,7 @@
-drop database if exists sell;
+drop database if exists dine;
 # utf8mb4和utf8mb4_unicode_ci主要解决emoji表情符号不能存入数据的问题
-create database sell default character set utf8mb4 collate utf8mb4_unicode_ci;
-use sell;
+create database dine default character set utf8mb4 collate utf8mb4_unicode_ci;
+use dine;
 
 -- 类目
 create table `product_category`
@@ -83,9 +83,10 @@ create table `seller_info`
     `update_time` timestamp   not null default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`seller_id`)
 ) comment '卖家信息表';
-# 创建一个默认管理员 密码2501902696也是老师的微信，有任何问题可以加老师微信咨询
+# 创建一个默认管理员
 INSERT INTO seller_info
-VALUES (1, '编程小石头', '2501902696', '2501902696', now(), now());
+VALUES (1, '春日花开', 'huiyuan', '123456', now(), now());
+VALUES (2, '管理员', 'admin', '123456', now(), now());
 
 create table `user`
 (

@@ -1,8 +1,9 @@
 package com.dine.form;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Data;
+
+import javax.validation.constraints.NotEmpty;
 
 
 @Data

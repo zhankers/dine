@@ -25,10 +25,11 @@ public class User {
     @GeneratedValue
     private int id;
     private String username;
+    private String password;
     private String phone;
     private String openid;
-    private String zhuohao;//桌号
-    private String renshu;//用餐人数
+    private String zhuohao;
+    private String renshu;
 
     private Date createTime;
     private Date updateTime;

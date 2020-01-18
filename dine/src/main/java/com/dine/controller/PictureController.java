@@ -25,7 +25,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 用户相关
+ * 轮播图
  */
 @RestController
 @RequestMapping("/picture")
@@ -37,7 +37,7 @@ public class PictureController {
 
 
     @GetMapping("/getAll")
-    public ResultVO getUserInfo() {
+    public ResultVO getPictureInfo() {
         List<Picture> pictures = repository.findAll();
         return ResultVOUtil.success(pictures);
     }
