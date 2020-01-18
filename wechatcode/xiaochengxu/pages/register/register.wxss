@@ -1,0 +1,9 @@
+/* pages/register/register.wxss */
+@import "../login/login.wxss";
+
+
+.logincu {
+  margin-top: 40px;
+  font-size: 26rpx;
+  color: #1E90FF
+}

@@ -4,13 +4,13 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
-    // baseUrl: 'http://localhost:8080/sell' //本地调试
-    baseUrl: 'http://20.86.11.247:8080/sell' //真机调试,这里的ip地址一定是你电脑的ip
+    baseUrl: 'http://localhost:8080/sell' //本地调试
+    // baseUrl: 'http://20.86.11.247:8080/sell' //真机调试,这里的ip地址一定是你电脑的ip
   },
   onLaunch: function() {
     //云开发初始化
     wx.cloud.init({
-      env: 'prod-924a3b',
+      env: 'dine-dev-8bhtb',
       traceUser: true,
     })
     this.db = wx.cloud.database(); //云数据库初始化
