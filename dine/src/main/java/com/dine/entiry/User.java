@@ -28,6 +28,7 @@ public class User {
     private String password;
     private String phone;
     private String openid;
+    private String token;
     private String zhuohao;
     private String renshu;
 

@@ -5,6 +5,7 @@ import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.form.UserForm;
 import com.dine.repository.UserRepository;
+import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
 import com.dine.utils.ResultVOUtil;
 import com.dine.vo.ResultVO;
@@ -89,19 +90,28 @@ public class UserController {
         String confirmm = map.get("confirmm");
         log.info("username:{}, password:{}, confirmPwd:{}", username, password, confirmm);
 
-        if (StringUtils.isEmpty(username) || Objects.equal(password, confirmm)) {
+        if (StringUtils.isEmpty(username) || !Objects.equal(password, confirmm)) {
             log.error("两次密码不一致");
             return ResultVO.error(2, "密码不匹配");
         }
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setCreateTime(new Date());
-        user.setUpdateTime(new Date());
+        String userId = KeyUtil.genUUID();
+        String token = JwtUtil.sign(String.valueOf(userId));
 
-        User save = repository.save(user);
-        return ResultVO.success(save);
+        System.out.println(token.length() +" --- ");
+
+        User example = new User();
+        example.setUsername(username);
+        example.setOpenid(userId);
+        example.setToken(token);
+        example.setPassword(password);
+        example.setCreateTime(new Date());
+        example.setUpdateTime(new Date());
+        User user = repository.save(example);
+
+        repository.save(user);
+
+        return ResultVO.success(user);
     }
 
 }
