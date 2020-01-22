@@ -36,7 +36,7 @@ Page({
     maskFlag: true,
 
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.tableNum) {
       tableNum = options.tableNum;
       console.log("桌号:", tableNum)
@@ -118,7 +118,7 @@ Page({
     })
 
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - res.windowWidth / 2) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
@@ -129,7 +129,7 @@ Page({
 
 
   // 点击切换顶部tab
-  tabClick: function(e) {
+  tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -137,7 +137,7 @@ Page({
   },
 
   // 点击切换右侧数据
-  changeRightMenu: function(e) {
+  changeRightMenu: function (e) {
     var classify = e.target.dataset.id; // 获取点击项的id
     var foodList = this.data.foodList;
     let foods = categories[classify].foods;
@@ -150,14 +150,14 @@ Page({
   },
 
   // 购物车增加数量
-  addCount: function(e) {
+  addCount: function (e) {
     //点加号之前必须先扫码桌号
     if (!tableNum) {
       wx.showModal({
         title: '提示',
         content: '请到首页扫码点餐',
         showCancel: false, //去掉取消按钮
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
             wx.switchTab({
               url: '../index/index',
@@ -212,7 +212,7 @@ Page({
     this.getTotalPrice();
   },
   // 定义根据id删除数组的方法
-  removeByValue: function(array, val) {
+  removeByValue: function (array, val) {
     for (var i = 0; i < array.length; i++) {
       if (array[i].id == val) {
         array.splice(i, 1);
@@ -221,7 +221,7 @@ Page({
     }
   },
   // 购物车减少数量
-  minusCount: function(e) {
+  minusCount: function (e) {
     var id = e.currentTarget.dataset.id;
     var arr = wx.getStorageSync('cart') || [];
     for (var i in this.data.foodList) {
@@ -263,7 +263,7 @@ Page({
     this.getTotalPrice();
   },
   // 获取购物车总价、总数
-  getTotalPrice: function() {
+  getTotalPrice: function () {
     var cartList = this.data.cartList; // 获取购物车列表
     var totalP = 0;
     var totalN = 0
@@ -278,7 +278,7 @@ Page({
     });
   },
   // 清空购物车
-  cleanList: function(e) {
+  cleanList: function (e) {
     for (var i in this.data.foodList) {
       this.data.foodList[i].quantity = 0;
     }
@@ -298,7 +298,7 @@ Page({
   },
 
   //删除购物车单项
-  deleteOne: function(e) {
+  deleteOne: function (e) {
     var id = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index;
     var arr = wx.getStorageSync('cart')
@@ -332,7 +332,7 @@ Page({
     this.getTotalPrice()
   },
   //切换购物车开与关
-  cascadeToggle: function() {
+  cascadeToggle: function () {
     var that = this;
     var arr = this.data.cartList
     if (arr.length > 0) {
@@ -347,7 +347,7 @@ Page({
 
   },
   // 打开购物车方法
-  cascadePopup: function() {
+  cascadePopup: function () {
     var that = this;
     // 购物车打开动画
     var animation = wx.createAnimation({
@@ -374,7 +374,7 @@ Page({
     });
   },
   // 关闭购物车方法
-  cascadeDismiss: function() {
+  cascadeDismiss: function () {
     var that = this
     // 购物车关闭动画
     that.animation.translate(0, 285).step();
@@ -393,13 +393,13 @@ Page({
     });
   },
   // 跳转确认订单页面
-  gotoOrder: function() {
+  gotoOrder: function () {
     if (!tableNum) {
       wx.showModal({
         title: '提示',
         content: '请到首页扫码点餐',
         showCancel: false, //去掉取消按钮
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
             wx.switchTab({
               url: '../index/index',
@@ -426,7 +426,7 @@ Page({
         title: '请登录',
         content: '请到个人中心登录',
         showCancel: false, //去掉取消按钮
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
             wx.switchTab({
               url: '../me/me',
@@ -440,7 +440,7 @@ Page({
       url: '../confirmOrder/confirmOrder?tableNum=' + tableNum
     })
   },
-  GetQueryString: function(name) {
+  GetQueryString: function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]);

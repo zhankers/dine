@@ -1,6 +1,8 @@
 @import '../../wxss/weui.wxss';
 @import '../../wxss/common.wxss';
+
 /**app.wxss**/
+
 .container {
   height: 100%;
   display: flex;
@@ -9,23 +11,27 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
-.bc_green{
-  background-color: #ff9600;
-}
-.bc_white{
-   background-color: #ffffff;
-}
-.new_padd{
-  padding: 15rpx 30rpx;
-}
-.color_white{
-  color: #fff;
-}
-.bg_white{
-  color:#ffffff;
 }
 
+.bc_green {
+  background-color: #ff9600;
+}
+
+.bc_white {
+  background-color: #fff;
+}
+
+.new_padd {
+  padding: 15rpx 30rpx;
+}
+
+.color_white {
+  color: #fff;
+}
+
+.bg_white {
+  color: #fff;
+}
 
 /*公用  */
 
@@ -46,6 +52,7 @@
 .weui-navbar__item.weui-bar__item_on {
   color: #000;
 }
+
 .tab_style {
   position: fixed;
   top: 148rpx;
@@ -280,9 +287,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity:0.6;
+  opacity: 0.6;
   background: #000;
-   z-index: 666; 
+  z-index: 666;
 }
 
 /*购物车弹窗  */
@@ -468,18 +475,21 @@
   height: 10rpx;
   background: #ddd;
 }
+
 /*判断是否登录  */
-.maskOne{
+
+.maskOne {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity:0.7;
+  opacity: 0.7;
   background: #000;
-   z-index: 555; 
+  z-index: 555;
 }
-.w_isLoginBox{
+
+.w_isLoginBox {
   position: absolute;
   z-index: 888;
   width: 76%;
@@ -488,36 +498,44 @@
   top: 30%;
   background: #fff;
   border-radius: 20rpx;
-  }
-  /*标题  */
-.modal_title{
+}
+
+/*标题  */
+
+.modal_title {
   width: 100%;
   line-height: 50px;
   text-align: center;
 }
-.w_isLogin{
-   width: 94%; 
-   margin:0  auto;
-}
-.w_input{
-  border: 1px #ddd solid;
-  padding:0 0 0 10rpx;
 
+.w_isLogin {
+  width: 94%;
+  margin: 0 auto;
 }
-.w_inputCode{
+
+.w_input {
+  border: 1px #ddd solid;
+  padding: 0 0 0 10rpx;
+}
+
+.w_inputCode {
   border-top: 0;
 }
-.weui-cell::before{
+
+.weui-cell::before {
   border-top: none;
 }
-.getcode-btn{
+
+.getcode-btn {
   padding: 0 5px;
   background-color: #3cc51f;
   color: #fff;
 }
+
 /* 提交按钮 */
-.submitBtn{
+
+.submitBtn {
   width: 50%;
   height: 40px;
-  margin-top:10px;
+  margin-top: 10px;
 }

@@ -56,8 +56,8 @@ Page({
     var zh = this.data.zh,
       mm = this.data.mm,
       confirmm = this.data.confirmm;
-    
-    if (mm !== confirmm){
+
+    if (mm !== confirmm) {
       wx.showToast({
         title: '两次密码输入不一致',
       })
@@ -72,8 +72,12 @@ Page({
         password: mm,
         confirmm: confirmm
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res)
+        if (res && res.data && res.data.data && res.data.data.length > 0) {
+            
+
+        }
       },
 
 
