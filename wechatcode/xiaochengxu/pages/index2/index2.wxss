@@ -1,0 +1,77 @@
+/**index.wxss**/
+
+.category-panel1 {
+  background-color: rgb(250, 244, 244);
+  width: 100%;
+  display: flex;
+  color: #666;
+  flex-direction: column;
+  font-size: 11px;
+  justify-content: space-around;
+}
+
+.category-panel2 {
+  background-color: #fff;
+  margin-top: 6px;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  color: #666;
+  flex-direction: row;
+  font-size: 11px;
+}
+
+.category-item {
+  padding: 10px 5px 10px 5px;
+  display: flex;
+  
+  flex-direction: column;
+}
+
+.category-item-title{
+  font-size: 14px;
+  
+}
+
+.category-item-image {
+  width: 80px;
+  height: 80px;
+  margin: 10px 5px 10px 5px;
+  overflow: unset;
+  
+}
+
+.category-item-image1 {
+  width: 50px;
+  height: 45px;
+  overflow: unset;
+  padding: 15px 12px 0 6px;
+}
+
+.category-item-desc {
+  padding-top: 3px;
+}
+
+
+.category-item-text {
+  margin-right: 5px;
+
+}
+
+/* 下面是领取红包的弹窗样式 */
+
+/* 遮罩层 */
+
+/* 弹出层 */
+
+
+/* 弹出层里面的图片 */
+
+
+/* 弹出层里面的按钮 */
+
+
+
+/* 弹出层里面的文字 */
+
+

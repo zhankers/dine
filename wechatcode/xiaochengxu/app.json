@@ -8,7 +8,8 @@
     "pages/change/change",
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/index2/index2"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,6 +27,12 @@
         "iconPath": "image/home_no.png",
         "pagePath": "pages/index/index",
         "text": "首页"
+      },
+      {
+        "selectedIconPath": "image/home_yes.png",
+        "iconPath": "image/home_no.png",
+        "pagePath": "pages/index2/index2",
+        "text": "TEST2"
       },
       {
         "selectedIconPath": "image/home_yes.png",
