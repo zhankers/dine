@@ -52,6 +52,7 @@ html {
 #page-content-wrapper {
   padding-top: 70px;
   width: 100%;
+  float:left;
 }
 /*-------------------------------*/
 /*     Sidebar nav styles        */
@@ -127,7 +128,7 @@ html {
   width: 100%;
 }
 .sidebar-nav .dropdown-menu {
-  background-color: #222222;
+  background-color: #734141;
   border-radius: 0;
   border: none;
   box-shadow: none;

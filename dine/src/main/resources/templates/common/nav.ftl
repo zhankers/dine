@@ -1,53 +1,57 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-	<ul class="nav sidebar-nav">
-		<li class="sidebar-brand">
-			<a href="#">
-				卖家管理系统
-			</a>
-		</li>
-		<li>
-			<a href="/sell/seller/order/list"><i class="fa fa-fw fa-list-alt"></i> 订单</a>
-		</li>
-		<li class="dropdown open">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i
-						class="fa fa-fw fa-plus"></i> 商品 <span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<li class="dropdown-header">操作</li>
-				<li><a href="/sell/seller/product/list">列表</a></li>
-				<li><a href="/sell/seller/product/index">新增</a></li>
-			</ul>
-		</li>
-		<li class="dropdown open">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i
-						class="fa fa-fw fa-plus"></i> 类目 <span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<li class="dropdown-header">操作</li>
-				<li><a href="/sell/seller/category/list">列表</a></li>
-				<li><a href="/sell/seller/category/index">新增</a></li>
-			</ul>
-		</li>
+<div class="lsm-scroll">
+    <div class="lsm-sidebar">
+        <ul class="nav sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    卖家管理系统
+                </a>
+            </li>
+            <li class="lsm-sidebar-item">
+                <a href="/sell/seller/order/list" style="font-size: 18px;line-height:18px"> 订单</a>
+            </li>
+            <li class="dropdown open">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-size: 18px;line-height:18px">
+                    商品 <i class="my-icon lsm-sidebar-more"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="/sell/seller/product/list">列表</a></li>
+                    <li><a href="/sell/seller/product/index">新增</a></li>
+                </ul>
+            </li>
+            <li class="dropdown open lsm-sidebar-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  style="font-size: 18px;line-height:18px">
+                    <i class="fa fa-fw fa-plus"></i> 类目 <i class="my-icon lsm-sidebar-more"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="/sell/seller/category/list">列表</a></li>
+                    <li><a href="/sell/seller/category/index">新增</a></li>
+                </ul>
+            </li>
 
-		<li class="dropdown open">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i
-						class="fa fa-fw fa-plus"></i> 管理员 <span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<li class="dropdown-header">操作</li>
-				<li><a href="/sell/admin/list">管理员列表</a></li>
-				<li><a href="/sell/admin/index">新增管理员</a></li>
-			</ul>
-		</li>
-		<li class="dropdown open">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i
-						class="fa fa-fw fa-plus"></i> 轮播图 <span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<li class="dropdown-header">操作</li>
-				<li><a href="/sell/picture/list">列表</a></li>
-				<li><a href="/sell/picture/index">新增</a></li>
-			</ul>
-		</li>
+            <li class="dropdown open lsm-sidebar-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-size: 18px;line-height:18px"><i
+                        class="fa fa-fw fa-plus"></i> 管理员 <i class="my-icon lsm-sidebar-more"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="/sell/admin/list">管理员列表</a></li>
+                    <li><a href="/sell/admin/index">新增管理员</a></li>
+                </ul>
+            </li>
+            <li class="dropdown open lsm-sidebar-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-size: 18px;line-height:18px">
+                    <i class="fa fa-fw fa-plus"></i> 轮播图 <i class="my-icon lsm-sidebar-more"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="/sell/picture/list">列表</a></li>
+                    <li><a href="/sell/picture/index">新增</a></li>
+                </ul>
+            </li>
 
-		<li>
-			<a href="/sell/admin/logout"><i class="fa fa-fw fa-list-alt"></i> 登出</a>
-		</li>
-	</ul>
+            <li class="lsm-sidebar-item">
+                <a href="/sell/admin/logout" style="font-size: 18px;line-height:18px"><i class="fa fa-fw fa-list-alt"></i> 登出</a>
+            </li>
+        </ul>
+    </div>
+</div>
 </nav>
