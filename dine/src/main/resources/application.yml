@@ -10,9 +10,9 @@ spring:
     active: dev
   datasource:
 #    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1/sell?useSSL=false&serverTimeZone=UTC&useOldAliasMetadataBehavior=true
-    username: root
-    password: 335100
+    url: jdbc:mysql://www.zhanke.site/sell?useSSL=false&serverTimeZone=UTC&useOldAliasMetadataBehavior=true
+    username: zhanke
+    password: zhanke1234
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
