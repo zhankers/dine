@@ -34,7 +34,7 @@
 								<td>${category.phone}</td>
 								<td>${category.createTime}</td>
 								<td>${category.updateTime}</td>
-								<td><a href="/sell/admin/index?sellerId=${category
+								<td><a href="${springMacroRequestContext.contextPath}/admin/index?sellerId=${category
 									.sellerId}">修改</a></td>
 							</tr>
 						</#list>

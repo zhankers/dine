@@ -30,7 +30,7 @@
 								<td>${category.picMessage}</td>
 								<td>${category.createTime}</td>
 								<td>${category.picUrl}</td>
-								<td><a href="/sell/picture/index?picId=${category
+								<td><a href="${springMacroRequestContext.contextPath}/picture/index?picId=${category
 									.picId}">修改</a></td>
 							</tr>
 						</#list>

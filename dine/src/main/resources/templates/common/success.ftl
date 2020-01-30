@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>成功提示</title>
-    <link href="/sell/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${springMacroRequestContext.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 

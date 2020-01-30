@@ -38,10 +38,10 @@
                             <td>${orderDTO.getOrderStatusEnum().message}</td>
                             <#--<td>${orderDTO.getPayStatusEnum().message}</td>-->
                             <td>${orderDTO.createTime}</td>
-                            <td><a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
+                            <td><a href="${springMacroRequestContext.contextPath}/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                             <td>
                                 <#if orderDTO.getOrderStatusEnum().message == "新订单">
-                                    <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
+                                    <a href="${springMacroRequestContext.contextPath}/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
                                 </#if>
                             </td>
                         </tr>
@@ -56,21 +56,21 @@
                     <#if currentPage lte 1>
                         <li class="disabled"><a href="#">上一页</a></li>
                     <#else>
-                        <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
+                        <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                     </#if>
 
                     <#list 1..orderDTOPage.getTotalPages() as index>
                         <#if currentPage == index>
                             <li class="disabled"><a href="#">${index}</a></li>
                         <#else>
-                            <li><a href="/sell/seller/order/list?page=${index}&size=${size}">${index}</a></li>
+                            <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${index}&size=${size}">${index}</a></li>
                         </#if>
                     </#list>
 
                     <#if currentPage gte orderDTOPage.getTotalPages()>
                         <li class="disabled"><a href="#">下一页</a></li>
                     <#else>
-                        <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
+                        <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
                     </#if>
                     </ul>
                 </div>
@@ -103,11 +103,11 @@
 
 <#--播放音乐-->
 <audio id="notice" loop="loop">
-    <source src="/sell/mp3/song.mp3" type="audio/mpeg" />
+    <source src="${springMacroRequestContext.contextPath}/mp3/song.mp3" type="audio/mpeg" />
 </audio>
 
-<script src="/sell/js/jquery.min.js"></script>
-<script src="/sell/js/bootstrap.min.js"></script>
+<script src="${springMacroRequestContext.contextPath}/js/jquery.min.js"></script>
+<script src="${springMacroRequestContext.contextPath}/js/bootstrap.min.js"></script>
 <script>
     var websocket = null;
     if('WebSocket' in window) {

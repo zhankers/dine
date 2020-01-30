@@ -5,18 +5,18 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>登录</title>
-    <link rel="stylesheet" href="/sell/css/normalize.css">
-    <link rel="stylesheet" href="/sell/css/login.css">
-    <link rel="stylesheet" href="/sell/css/sign-up-login.css">
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/normalize.css">
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/login.css">
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/sign-up-login.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/sell/css/inputEffect.css"/>
-    <link rel="stylesheet" href="/sell/css/tooltips.css"/>
-    <link rel="stylesheet" href="/sell/css/spop.min.css"/>
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/inputEffect.css"/>
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/tooltips.css"/>
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/spop.min.css"/>
 
-    <script src="/sell/js/jquery.min.js"></script>
-    <script src="/sell/js/snow.js"></script>
-    <script src="/sell/js/jquery.pure.tooltips.js"></script>
-    <script src="/sell/js/spop.min.js"></script>
+    <script src="${springMacroRequestContext.contextPath}/js/jquery.min.js"></script>
+    <script src="${springMacroRequestContext.contextPath}/js/snow.js"></script>
+    <script src="${springMacroRequestContext.contextPath}/js/jquery.pure.tooltips.js"></script>
+    <script src="${springMacroRequestContext.contextPath}/js/spop.min.js"></script>
     <script>
         (function () {
             // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
@@ -143,7 +143,7 @@
             } else {//登录
                 //调用后台登录验证的方法
                 $.ajax({
-                    url: "/sell/admin/loginAdmin",
+                    url: "${springMacroRequestContext.contextPath}/admin/loginAdmin",
                     data: {
                         "phone": username,
                         "password": password
@@ -151,7 +151,7 @@
                     success: function (data) {
                         $("#mainContainer").html(data);
                         console.log("登录成功", data);
-                        window.location.href = "/sell/seller/order/list";
+                        window.location.href = "${springMacroRequestContext.contextPath}/seller/order/list";
                     },
                     error: function (err) {
                         console.log("登录失败,用户名或者密码不正确", err);
@@ -365,7 +365,7 @@
 
             background-color: #00BDDC;
 
-            background-image: url(/sell/images/snow.jpg);
+            background-image: url(${springMacroRequestContext.contextPath}/images/snow.jpg);
 
             background-size: 100% 100%;
 
