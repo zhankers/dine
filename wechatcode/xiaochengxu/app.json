@@ -9,7 +9,8 @@
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
     "pages/register/register",
-    "pages/index2/index2"
+    "pages/index2/index2",
+    "pages/storelist/storelist"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,6 +23,12 @@
     "selectedColor": "#11cd6e",
     "borderStyle": "white",
     "list": [
+      {
+        "selectedIconPath": "image/me_yes.png",
+        "iconPath": "image/me_no.png",
+        "pagePath": "pages/storelist/storelist",
+        "text": "商家列表"
+      },
       {
         "selectedIconPath": "image/home_yes.png",
         "iconPath": "image/home_no.png",
