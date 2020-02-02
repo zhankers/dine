@@ -1,5 +1,6 @@
 package com.dine.controller;
 
+import com.dine.config.ProjectUrlConfig;
 import com.dine.vo.ResultVO;
 import com.dine.entiry.Picture;
 import com.dine.exception.SellException;
@@ -34,6 +35,8 @@ public class PictureController {
 
     @Autowired
     PictureRepository repository;
+    @Autowired
+    private ProjectUrlConfig projectUrlConfig;
 
 
     @GetMapping("/getAll")
@@ -70,7 +73,7 @@ public class PictureController {
         log.info("SellerForm={}", form);
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/picture/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/picture/index");
             return new ModelAndView("common/error", map);
         }
         Picture picture = new Picture();
@@ -82,11 +85,11 @@ public class PictureController {
             repository.save(picture);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/picture/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/picture/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/picture/list");
+        map.put("url", projectUrlConfig.getContextPath()+"/picture/list");
         return new ModelAndView("common/success", map);
     }
 

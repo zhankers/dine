@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <form role="form" method="post" action="/sell/seller/product/save">
+                    <form role="form" method="post" action="${springMacroRequestContext.contextPath}/seller/product/save">
                         <div class="form-group">
                             <label>名称</label>
                             <input name="productName" type="text" class="form-control" value="${(productInfo.productName)!''}"/>

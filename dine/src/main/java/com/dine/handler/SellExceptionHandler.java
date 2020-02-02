@@ -18,17 +18,9 @@ public class SellExceptionHandler {
     private ProjectUrlConfig projectUrlConfig;
 
     //拦截登录异常
-    //http://localhost:8080/sell/seller/category/list
-    //http://localhost:8080/sell/wechat/qrAuthorize?returnUrl=http://sell.natapp4.cc/sell/seller/login
     @ExceptionHandler(value = SellerAuthorizeException.class)
     public ModelAndView handlerAuthorizeException() {
-        //        return new ModelAndView("redirect:"
-        //                .concat(projectUrlConfig.getWechatOpenAuthorize())
-        //                .concat("/sell/wechat/qrAuthorize")
-        //                .concat("?returnUrl=")
-        //                .concat(projectUrlConfig.getSell())
-        //                .concat("/sell/seller/login"));
         return new ModelAndView("common/loginView");
-        //        return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sell/seller/order/list");
+
     }
 }

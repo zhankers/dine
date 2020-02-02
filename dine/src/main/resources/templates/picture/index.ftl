@@ -12,7 +12,7 @@
 		<div class="container-fluid">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-					<form role="form" method="post" action="/sell/picture/save">
+					<form role="form" method="post" action="${springMacroRequestContext.contextPath}/picture/save">
 						<div class="form-group">
 							<label>图片url</label>
 							<input name="picUrl" type="text" class="form-control"

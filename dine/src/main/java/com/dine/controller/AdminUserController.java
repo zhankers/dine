@@ -1,5 +1,6 @@
 package com.dine.controller;
 
+import com.dine.config.ProjectUrlConfig;
 import com.dine.constant.CookieConstant;
 import com.dine.constant.RedisConstant;
 import com.dine.entiry.SellerInfo;
@@ -36,6 +37,9 @@ public class AdminUserController {
     @Autowired
     SellerInfoRepository repository;
 
+    @Autowired
+    ProjectUrlConfig projectUrlConfig;
+
     @GetMapping("/loginAdmin")
     public String loginAdmin(@RequestParam("phone") String phone,
                              @RequestParam("password") String password,
@@ -65,7 +69,7 @@ public class AdminUserController {
             CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
         }
         map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/order/list");
+        map.put("url", projectUrlConfig.getContextPath()+ "/seller/order/list");
         return new ModelAndView("common/success", map);
     }
 
@@ -99,7 +103,7 @@ public class AdminUserController {
         log.info("SellerForm={}", form);
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/admin/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/admin/index");
             return new ModelAndView("common/error", map);
         }
         SellerInfo sellerInfo = new SellerInfo();
@@ -111,11 +115,11 @@ public class AdminUserController {
             repository.save(sellerInfo);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/admin/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/admin/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/admin/list");
+        map.put("url", projectUrlConfig.getContextPath()+"/admin/list");
         return new ModelAndView("common/success", map);
     }
 }

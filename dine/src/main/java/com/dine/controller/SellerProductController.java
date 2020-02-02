@@ -1,5 +1,6 @@
 package com.dine.controller;
 
+import com.dine.config.ProjectUrlConfig;
 import com.dine.entiry.ProductCategory;
 import com.dine.entiry.ProductInfo;
 import com.dine.exception.SellException;
@@ -38,6 +39,9 @@ public class SellerProductController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ProjectUrlConfig projectUrlConfig;
+
     /**
      * 列表
      * @param page
@@ -70,11 +74,11 @@ public class SellerProductController {
             productService.onSale(productId);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", projectUrlConfig.getContextPath()+"/seller/product/list");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", projectUrlConfig.getContextPath()+"/seller/product/list");
         return new ModelAndView("common/success", map);
     }
     /**
@@ -90,11 +94,11 @@ public class SellerProductController {
             productService.offSale(productId);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", projectUrlConfig.getContextPath()+"/seller/product/list");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", projectUrlConfig.getContextPath()+"/seller/product/list");
         return new ModelAndView("common/success", map);
     }
 
@@ -126,7 +130,7 @@ public class SellerProductController {
                              Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/product/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/seller/product/index");
             return new ModelAndView("common/error", map);
         }
 
@@ -142,11 +146,11 @@ public class SellerProductController {
             productService.save(productInfo);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/index");
+            map.put("url", projectUrlConfig.getContextPath()+"/seller/product/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", projectUrlConfig.getContextPath()+"/seller/product/list");
         return new ModelAndView("common/success", map);
     }
 }

@@ -1,6 +1,7 @@
 package com.dine.config;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -23,4 +24,7 @@ public class ProjectUrlConfig {
      * 点餐系统
      */
     public String sell;
+
+    @Value(value = "${server.servlet.context-path}")
+    public String contextPath;
 }
