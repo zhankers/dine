@@ -1,8 +1,8 @@
 package com.dine.controller;
 
 import com.dine.vo.ResultVO;
-import com.dine.entiry.Comment;
-import com.dine.entiry.OrderMaster;
+import com.dine.entity.Comment;
+import com.dine.entity.OrderMaster;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.enums.ResultEnum;

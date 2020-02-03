@@ -1,6 +1,6 @@
 package com.dine.service;
 
-import com.dine.entiry.ProductCategory;
+import com.dine.entity.ProductCategory;
 
 import java.util.List;
 import java.util.Optional;

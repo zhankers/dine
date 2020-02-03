@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.SellerInfo;
+import com.dine.entity.SellerInfo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

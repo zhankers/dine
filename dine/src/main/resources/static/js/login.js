@@ -13,8 +13,8 @@ $(function () {
 
     //管理登录
     function login() {
-        let phone = $(" input[ name='username' ] ").val();
-        let psw = $(" input[ name='password' ] ").val();
+        var phone = $(" input[ name='username' ] ").val();
+        var psw = $(" input[ name='password' ] ").val();
         if (phone == undefined || phone == "") {
             alert("请输入手机号");
             return;

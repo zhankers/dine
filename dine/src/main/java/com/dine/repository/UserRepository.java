@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.User;
+import com.dine.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package com.dine.service.impl;
 
-import com.dine.entiry.ProductInfo;
+import com.dine.entity.ProductInfo;
 import com.dine.dto.CartDTO;
 import com.dine.enums.ProductStatusEnum;
 import com.dine.enums.ResultEnum;

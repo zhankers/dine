@@ -1,6 +1,6 @@
 package com.dine.service;
 
-import com.dine.entiry.ProductInfo;
+import com.dine.entity.ProductInfo;
 import com.dine.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

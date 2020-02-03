@@ -1,6 +1,6 @@
 package com.dine.controller;
 
-import com.dine.entiry.User;
+import com.dine.entity.User;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.form.UserForm;
@@ -10,7 +10,6 @@ import com.dine.utils.KeyUtil;
 import com.dine.utils.ResultVOUtil;
 import com.dine.vo.ResultVO;
 import com.google.common.base.Objects;
-import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

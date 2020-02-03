@@ -1,6 +1,6 @@
 package com.dine.converter;
 
-import com.dine.entiry.OrderMaster;
+import com.dine.entity.OrderMaster;
 import com.dine.dto.OrderDTO;
 import org.springframework.beans.BeanUtils;
 

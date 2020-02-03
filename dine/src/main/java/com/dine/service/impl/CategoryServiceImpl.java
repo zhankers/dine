@@ -1,6 +1,6 @@
 package com.dine.service.impl;
 
-import com.dine.entiry.ProductCategory;
+import com.dine.entity.ProductCategory;
 import com.dine.repository.ProductCategoryRepository;
 import com.dine.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

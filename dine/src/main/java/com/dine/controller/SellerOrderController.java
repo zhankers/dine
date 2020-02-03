@@ -56,8 +56,7 @@ public class SellerOrderController {
      * @return
      */
     @GetMapping("/cancel")
-    public ModelAndView cancel(@RequestParam("orderId") String orderId,
-                               Map<String, Object> map) {
+    public ModelAndView cancel(@RequestParam("orderId") String orderId, Map<String, Object> map) {
         try {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
@@ -80,8 +79,7 @@ public class SellerOrderController {
      * @return
      */
     @GetMapping("/detail")
-    public ModelAndView detail(@RequestParam("orderId") String orderId,
-                               Map<String, Object> map) {
+    public ModelAndView detail(@RequestParam("orderId") String orderId, Map<String, Object> map) {
         OrderDTO orderDTO;
         try {
             orderDTO = orderService.findOne(orderId);
@@ -103,8 +101,7 @@ public class SellerOrderController {
      * @return
      */
     @GetMapping("/finish")
-    public ModelAndView finished(@RequestParam("orderId") String orderId,
-                                 Map<String, Object> map) {
+    public ModelAndView finished(@RequestParam("orderId") String orderId, Map<String, Object> map) {
         try {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.finish(orderDTO);

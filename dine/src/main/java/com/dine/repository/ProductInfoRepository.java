@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.ProductInfo;
+import com.dine.entity.ProductInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

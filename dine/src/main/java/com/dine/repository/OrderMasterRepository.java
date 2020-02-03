@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.OrderMaster;
+import com.dine.entity.OrderMaster;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

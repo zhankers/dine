@@ -1,6 +1,6 @@
 package com.dine.service;
 
-import com.dine.entiry.User;
+import com.dine.entity.User;
 
 /**
  * 用户端

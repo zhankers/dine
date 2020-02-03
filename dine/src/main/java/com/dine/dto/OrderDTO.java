@@ -2,7 +2,7 @@ package com.dine.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.dine.entiry.OrderDetail;
+import com.dine.entity.OrderDetail;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.utils.EnumUtil;
 import com.dine.utils.serializer.Date2StringSerializer;

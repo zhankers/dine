@@ -1,7 +1,7 @@
 package com.dine.controller;
 
 import com.dine.config.ProjectUrlConfig;
-import com.dine.entiry.ProductCategory;
+import com.dine.entity.ProductCategory;
 import com.dine.exception.SellException;
 import com.dine.form.CategoryForm;
 import com.dine.service.CategoryService;
@@ -51,8 +51,7 @@ public class SellerCategoryController {
      * @return
      */
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "categoryId", required = false) Integer categoryId,
-                              Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "categoryId", required = false) Integer categoryId, Map<String, Object> map) {
         if (categoryId != null) {
             ProductCategory productCategory = categoryService.findOne(categoryId).orElse(null);
             map.put("category", productCategory);

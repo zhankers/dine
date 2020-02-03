@@ -3,15 +3,17 @@ package com.dine.controller;
 import com.dine.config.ProjectUrlConfig;
 import com.dine.constant.CookieConstant;
 import com.dine.constant.RedisConstant;
-import com.dine.entiry.SellerInfo;
+import com.dine.entity.SellerInfo;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.form.SellerForm;
 import com.dine.repository.SellerInfoRepository;
 import com.dine.utils.CookieUtil;
+import com.dine.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -58,10 +61,35 @@ public class AdminUserController {
         }
     }
 
+    @GetMapping("/regAdmin")
+    public String registerAdmin(@RequestParam("phone") String phone,
+                                @RequestParam("username") String username,
+                                @RequestParam("password") String password,
+                                @RequestParam("repassword") String confirmPwd,
+                                HttpServletRequest request,
+                                HttpServletResponse response) {
+
+        SellerInfo sellerInfo = repository.findByPhone(phone);
+        log.info("商家信息={}", sellerInfo);
+        if (sellerInfo != null || password == null || !password.equals(confirmPwd)) {
+            throw new SellException(ResultEnum.REG_FAIL);
+        } else {
+            sellerInfo = new SellerInfo();
+            sellerInfo.setPhone(phone);
+            sellerInfo.setPassword(password);
+            sellerInfo.setUsername(username);
+            sellerInfo.setCreateTime(new Date());
+
+            SellerInfo result = repository.save(sellerInfo);
+
+            // request.getSession().setAttribute("ADMIN_USER_ID", result.getSellerId());
+
+            return "注册成功";
+        }
+    }
+
     @GetMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request,
-                               HttpServletResponse response,
-                               Map<String, Object> map) {
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
         //1. 从cookie里查询
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
         if (cookie != null) {
@@ -73,10 +101,9 @@ public class AdminUserController {
         return new ModelAndView("common/success", map);
     }
 
-    /*
+    /**
      * 页面相关
-     * */
-
+     */
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map) {
         List<SellerInfo> categoryList = repository.findAll();
@@ -85,8 +112,7 @@ public class AdminUserController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "sellerId", required = false) Integer sellerId,
-                              Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "sellerId", required = false) Integer sellerId, Map<String, Object> map) {
         SellerInfo sellerInfo = repository.findBySellerId(sellerId);
         map.put("category", sellerInfo);
 
@@ -97,9 +123,7 @@ public class AdminUserController {
      * 保存/更新
      */
     @PostMapping("/save")
-    public ModelAndView save(@Valid SellerForm form,
-                             BindingResult bindingResult,
-                             Map<String, Object> map) {
+    public ModelAndView save(@Valid SellerForm form, BindingResult bindingResult, Map<String, Object> map) {
         log.info("SellerForm={}", form);
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());

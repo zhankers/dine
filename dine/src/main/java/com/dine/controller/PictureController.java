@@ -2,7 +2,7 @@ package com.dine.controller;
 
 import com.dine.config.ProjectUrlConfig;
 import com.dine.vo.ResultVO;
-import com.dine.entiry.Picture;
+import com.dine.entity.Picture;
 import com.dine.exception.SellException;
 import com.dine.form.PictureForm;
 import com.dine.repository.PictureRepository;
@@ -55,8 +55,7 @@ public class PictureController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "picId", required = false) Integer picId,
-                              Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "picId", required = false) Integer picId, Map<String, Object> map) {
         Picture picture = repository.findByPicId(picId);
         map.put("category", picture);
 
@@ -67,9 +66,7 @@ public class PictureController {
      * 保存/更新
      */
     @PostMapping("/save")
-    public ModelAndView save(@Valid PictureForm form,
-                             BindingResult bindingResult,
-                             Map<String, Object> map) {
+    public ModelAndView save(@Valid PictureForm form, BindingResult bindingResult, Map<String, Object> map) {
         log.info("SellerForm={}", form);
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());

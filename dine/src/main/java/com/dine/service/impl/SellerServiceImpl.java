@@ -1,6 +1,6 @@
 package com.dine.service.impl;
 
-import com.dine.entiry.SellerInfo;
+import com.dine.entity.SellerInfo;
 import com.dine.repository.SellerInfoRepository;
 import com.dine.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;

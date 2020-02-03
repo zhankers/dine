@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.Picture;
+import com.dine.entity.Picture;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/tooltips.css"/>
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/css/spop.min.css"/>
 
+    <script>var contextPath = "${springMacroRequestContext.contextPath}"; </script>
     <script src="${springMacroRequestContext.contextPath}/js/jquery.min.js"></script>
     <script src="${springMacroRequestContext.contextPath}/js/snow.js"></script>
     <script src="${springMacroRequestContext.contextPath}/js/jquery.pure.tooltips.js"></script>
@@ -97,10 +98,11 @@
         }
 
         function login() {//登录
+
             var username = $("#login-username").val(),
-                password = $("#login-password").val(),
-                validatecode = null,
-                flag = false;
+                    password = $("#login-password").val(),
+                    validatecode = null,
+                    flag = false;
             //判断用户名密码是否为空
             if (username == "") {
                 $.pt({
@@ -166,11 +168,12 @@
         //注册
         function register() {
             var username = $("#register-username").val(),
-                password = $("#register-password").val(),
-                repassword = $("#register-repassword").val(),
-                code = $("#register-code").val(),
-                flag = false,
-                validatecode = null;
+                    phone = $("#register-phone").val(),
+                    password = $("#register-password").val(),
+                    repassword = $("#register-repassword").val(),
+                    code = $("#register-code").val(),
+                    flag = false,
+                    validatecode = null;
             //判断用户名密码是否为空
             if (username == "") {
                 $.pt({
@@ -183,6 +186,19 @@
                 });
                 flag = true;
             }
+
+            if (phone == "") {
+                $.pt({
+                    target: $("#register-phone"),
+                    position: 'r',
+                    align: 't',
+                    width: 'auto',
+                    height: 'auto',
+                    content: "手机号不能为空"
+                });
+                flag = true;
+            }
+
             if (password == "") {
                 $.pt({
                     target: $("#register-password"),
@@ -207,15 +223,15 @@
                 }
             }
             //用户名只能是15位以下的字母或数字
-            var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
-            if (!regExp.test(username)) {
+            var regExp = new RegExp("^1(3|4|5|7|8)\\d{9}$");
+            if (!regExp.test(phone)) {
                 $.pt({
-                    target: $("#register-username"),
+                    target: $("#register-phone"),
                     position: 'r',
                     align: 't',
                     width: 'auto',
                     height: 'auto',
-                    content: "用户名必须为15位以下的字母或数字"
+                    content: "手机号不正确"
                 });
                 flag = true;
             }
@@ -223,8 +239,8 @@
             //调后台代码检查用户名是否已经被注册
 
             //检查注册码是否正确
-            //调后台方法检查注册码，这里写死为11111111
-            if (code != '11111111') {
+            //调后台方法检查注册码，这里写死为1111
+            if (code != '1111') {
                 $.pt({
                     target: $("#register-code"),
                     position: 'r',
@@ -240,36 +256,53 @@
             if (flag) {
                 return false;
             } else {//注册
-                spop({
-                    template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
-                    position: 'top-center',
-                    style: 'success',
-                    autoclose: 3000,
-                    onOpen: function () {
-                        var second = 2;
-                        var showPop = setInterval(function () {
-                            if (second == 0) {
-                                clearInterval(showPop);
-                            }
-                            $('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于' + second + '秒后返回登录');
-                            second--;
-                        }, 1000);
+
+                $.ajax({
+                    url: "${springMacroRequestContext.contextPath}/admin/regAdmin",
+                    data: {
+                        "phone": phone,
+                        "username": username,
+                        "password": password,
+                        "repassword": repassword,
                     },
-                    onClose: function () {
-                        goto_login();
+                    success: function (data) {
+                        spop({
+                            template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
+                            position: 'top-center',
+                            style: 'success',
+                            autoclose: 3000,
+                            onOpen: function () {
+                                var second = 2;
+                                var showPop = setInterval(function () {
+                                    if (second == 0) {
+                                        clearInterval(showPop);
+                                    }
+                                    $('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于' + second + '秒后返回登录');
+                                    second--;
+                                }, 1000);
+                            },
+                            onClose: function () {
+                                goto_login();
+                            }
+                        });
+                    },
+                    error: function (err) {
+                        console.log("注册失败,用户名或者密码不正确", err);
+                        alert("注册失败,手机号或者密码不正确");
+                        toastr.error("error!");
                     }
                 });
-                return false;
+
             }
         }
 
         //重置密码
         function forget() {
             var username = $("#forget-username").val(),
-                password = $("#forget-password").val(),
-                code = $("#forget-code").val(),
-                flag = false,
-                validatecode = null;
+                    password = $("#forget-password").val(),
+                    code = $("#forget-code").val(),
+                    flag = false,
+                    validatecode = null;
             //判断用户名密码是否为空
             if (username == "") {
                 $.pt({
@@ -409,7 +442,7 @@
 							<span class="input input--hideo">
 								<input class="input__field input__field--hideo" type="text" id="login-username"
                                        name="username"
-                                       autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15"/>
+                                       autocomplete="off" placeholder="请输入手机号" tabindex="1" maxlength="15"/>
 								<label class="input__label input__label--hideo" for="login-username">
 									<i class="fa fa-fw fa-user icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
@@ -494,38 +527,46 @@
                 </div>
                 <div class="pad input-container">
                     <section class="content">
-							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="register-username"
-                                       autocomplete="off" placeholder="请输入用户名" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-username">
-									<i class="fa fa-fw fa-user icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
                         <span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-password"
-                                       placeholder="请输入密码" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-password">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
+                            <input class="input__field input__field--hideo" type="text" id="register-username"
+                                   autocomplete="off" placeholder="请输入用户名" maxlength="15"/>
+                            <label class="input__label input__label--hideo" for="register-username">
+                                <i class="fa fa-fw fa-user icon icon--hideo"></i>
+                                <span class="input__label-content input__label-content--hideo"></span>
+                            </label>
+                        </span>
                         <span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-repassword"
-                                       placeholder="请确认密码" maxlength="15"/>
-								<label class="input__label input__label--hideo" for="register-repassword">
-									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
+                            <input class="input__field input__field--hideo" type="text" id="register-phone"
+                                   autocomplete="off" placeholder="请输入手机号" maxlength="15"/>
+                            <label class="input__label input__label--hideo" for="register-phone">
+                                <i class="fa fa-fw fa-user icon icon--hideo"></i>
+                                <span class="input__label-content input__label-content--hideo"></span>
+                            </label>
+                        </span>
                         <span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="register-code"
-                                       autocomplete="off" placeholder="请输入注册码"/>
-								<label class="input__label input__label--hideo" for="register-code">
-									<i class="fa fa-fw fa-wifi icon icon--hideo"></i>
-									<span class="input__label-content input__label-content--hideo"></span>
-								</label>
-							</span>
+                            <input class="input__field input__field--hideo" type="password" id="register-password"
+                                   placeholder="请输入密码" maxlength="15"/>
+                            <label class="input__label input__label--hideo" for="register-password">
+                                <i class="fa fa-fw fa-lock icon icon--hideo"></i>
+                                <span class="input__label-content input__label-content--hideo"></span>
+                            </label>
+                        </span>
+                        <span class="input input--hideo">
+                            <input class="input__field input__field--hideo" type="password" id="register-repassword"
+                                   placeholder="请确认密码" maxlength="15"/>
+                            <label class="input__label input__label--hideo" for="register-repassword">
+                                <i class="fa fa-fw fa-lock icon icon--hideo"></i>
+                                <span class="input__label-content input__label-content--hideo"></span>
+                            </label>
+                        </span>
+                        <span class="input input--hideo">
+                            <input class="input__field input__field--hideo" type="text" id="register-code"
+                                   autocomplete="off" placeholder="请输入注册码"/>
+                            <label class="input__label input__label--hideo" for="register-code">
+                                <i class="fa fa-fw fa-wifi icon icon--hideo"></i>
+                                <span class="input__label-content input__label-content--hideo"></span>
+                            </label>
+                        </span>
                     </section>
                 </div>
                 <div class="form-actions">

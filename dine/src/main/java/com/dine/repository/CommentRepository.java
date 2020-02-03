@@ -1,6 +1,6 @@
 package com.dine.repository;
 
-import com.dine.entiry.Comment;
+import com.dine.entity.Comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

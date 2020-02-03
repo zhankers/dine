@@ -1,6 +1,6 @@
 package com.dine.service.impl;
 
-import com.dine.entiry.User;
+import com.dine.entity.User;
 import com.dine.repository.UserRepository;
 import com.dine.service.UserService;
 

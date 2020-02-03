@@ -1,9 +1,9 @@
 package com.dine.service.impl;
 
 import com.dine.converter.OrderMaster2OrderDTOConverter;
-import com.dine.entiry.OrderDetail;
-import com.dine.entiry.OrderMaster;
-import com.dine.entiry.ProductInfo;
+import com.dine.entity.OrderDetail;
+import com.dine.entity.OrderMaster;
+import com.dine.entity.ProductInfo;
 import com.dine.dto.CartDTO;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
@@ -18,7 +18,6 @@ import com.dine.utils.KeyUtil;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

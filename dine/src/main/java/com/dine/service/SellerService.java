@@ -1,6 +1,6 @@
 package com.dine.service;
 
-import com.dine.entiry.SellerInfo;
+import com.dine.entity.SellerInfo;
 
 /**
  * 卖家端

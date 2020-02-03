@@ -1,8 +1,8 @@
 package com.dine.controller;
 
 import com.dine.config.ProjectUrlConfig;
-import com.dine.entiry.ProductCategory;
-import com.dine.entiry.ProductInfo;
+import com.dine.entity.ProductCategory;
+import com.dine.entity.ProductInfo;
 import com.dine.exception.SellException;
 import com.dine.form.ProductForm;
 import com.dine.service.CategoryService;
@@ -88,8 +88,7 @@ public class SellerProductController {
      * @return
      */
     @RequestMapping("/off_sale")
-    public ModelAndView offSale(@RequestParam("productId") String productId,
-                               Map<String, Object> map) {
+    public ModelAndView offSale(@RequestParam("productId") String productId, Map<String, Object> map) {
         try {
             productService.offSale(productId);
         } catch (SellException e) {
@@ -103,8 +102,7 @@ public class SellerProductController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId,
-                      Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId, Map<String, Object> map) {
         if (!StringUtils.isEmpty(productId)) {
             ProductInfo productInfo = productService.findOne(productId).orElse(null);
             map.put("productInfo", productInfo);
@@ -125,9 +123,7 @@ public class SellerProductController {
      * @return
      */
     @PostMapping("/save")
-    public ModelAndView save(@Valid ProductForm form,
-                             BindingResult bindingResult,
-                             Map<String, Object> map) {
+    public ModelAndView save(@Valid ProductForm form, BindingResult bindingResult, Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
             map.put("url", projectUrlConfig.getContextPath()+"/seller/product/index");
