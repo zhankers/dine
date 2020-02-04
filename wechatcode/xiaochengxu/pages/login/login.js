@@ -3,7 +3,7 @@ var app = getApp();
 Page({
   data: {
     disabled: !0,
-    zh: "",
+    sjh: "",
     mm: "",
     logintext: "登录"
   },
@@ -21,12 +21,12 @@ Page({
   },
 
   /**
-   * 输入账号
+   * 输入手机号
    */
-  srzh: function(t) {
+  srsjh: function(t) {
     console.log(t.detail.value), this.setData({
-      zh: t.detail.value
-    }), "" != this.data.zh && "" != this.data.mm ? this.setData({
+      sjh: t.detail.value
+    }), "" != this.data.sjh && "" != this.data.mm ? this.setData({
       disabled: !1
     }) : this.setData({
       disabled: !0
@@ -39,7 +39,7 @@ Page({
   srmm: function(t) {
     console.log(t.detail.value), this.setData({
       mm: t.detail.value
-    }), "" != this.data.zh && "" != this.data.mm ? this.setData({
+    }), "" != this.data.sjh && "" != this.data.mm ? this.setData({
       disabled: !1
     }) : this.setData({
       disabled: !0
@@ -50,9 +50,9 @@ Page({
    * 登录
    */
   login: function() {
-    var zh = this.data.zh,
+    var sjh = this.data.sjh,
       mm = this.data.mm;
-    console.log(zh, mm), this.setData({
+    console.log(sjh, mm), this.setData({
       logintext: "登录中...",
       disabled: !0
     });
@@ -62,38 +62,48 @@ Page({
     wx.request({
       url: app.globalData.baseUrl + '/user/login',
       data: {
-        username: zh,
+        username: sjh,
         password: mm
       },
       success: function(t) {
-        console.log(t), 
-        
-        that.setData({
-          logintext: "登录",
-          disabled: !1
-        })
+        console.log(t),
 
-        if (2 == t.data) {
+          that.setData({
+            logintext: "登录",
+            disabled: !1
+          })
+
+        if (500 == t.data.status) {
           wx.showModal({
             title: "提示",
             content: "您的帐号或密码错误，请重新输入"
           })
         } else {
-          
+          var resultData = t.data.data
+
           if ("1" == t.data.data.state) {
-            wx.setStorageSync("sjdsjid", t.data.store_id),
-              wx.redirectTo({
-                url: "../buy/buy"
-              })
+            var openId = resultData.openid
+            var token = resultData.token
+            var userInfo = resultData.userInfo
+            app.globalData.openid = openId
+            app.globalData.token = token
+            app.globalData.userInfo = userInfo
+
+            wx.setStorageSync("token", token),
+            wx.setStorageSync('openid', openId),
+            wx.setStorageSync('user', userInfo);
+            wx.redirectTo({
+              url: "../buy/buy"
+            })
           } else {
             wx.showModal({
               title: "提示",
               content: "该帐号已禁用"
             })
           }
-          
+
         }
-        
+
         // 2 == t.data ? wx.showModal({
         //   title: "提示",
         //   content: "您的帐号或密码错误，请重新输入"
@@ -107,14 +117,14 @@ Page({
     });
   },
 
-  register: function(){
+  register: function() {
     wx.navigateTo({
       url: '../register/register'
     })
   },
 
   onLoad: function(t) {
-    
+
   },
 
   onReady: function() {},

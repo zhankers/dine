@@ -4,8 +4,9 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
+    token:null,
     baseUrl: 'http://localhost:8080/sell' //本地调试
-    // baseUrl: 'http://20.86.11.247:8080/sell' //真机调试,这里的ip地址一定是你电脑的ip
+    // baseUrl: 'http://zhanke.site:8080/sell/' //真机调试,这里的ip地址一定是你电脑的ip
   },
   onLaunch: function() {
     //云开发初始化
@@ -14,7 +15,7 @@ App({
       traceUser: true,
     })
     this.db = wx.cloud.database(); //云数据库初始化
-    this.getOpenid();
+    // this.getOpenid();
   },
   // 获取用户openid
   getOpenid: function() {
@@ -43,6 +44,7 @@ App({
   // 获取用户信息，如果用户没有授权，就获取不到
   _getUserInfo: function() {
     var app = this;
+
     wx.getUserInfo({ //从网络获取最新用户信息
       success: function(res) {
         var user = res.userInfo;
@@ -96,10 +98,11 @@ App({
       },
       success: function(res) {
         if (res && res.data && res.data.data) {
-          userInfo.realname = res.data.data.username;
-          userInfo.realphone = res.data.data.phone;
-          userInfo.realzhuohao = res.data.data.zhuohao;
-          userInfo.realrenshu = res.data.data.renshu;
+          // userInfo.realname = res.data.data.username;
+          // userInfo.realphone = res.data.data.phone;
+          // userInfo.realzhuohao = res.data.data.zhuohao;
+          // userInfo.realrenshu = res.data.data.renshu;
+          userInfo = res.data.data;
           app.globalData.userInfo = userInfo;
         }
       }

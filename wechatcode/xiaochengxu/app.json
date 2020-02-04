@@ -42,12 +42,6 @@
         "text": "TEST2"
       },
       {
-        "selectedIconPath": "image/home_yes.png",
-        "iconPath": "image/home_no.png",
-        "pagePath": "pages/login/login",
-        "text": "TEST"
-      },
-      {
         "selectedIconPath": "image/me_yes.png",
         "iconPath": "image/me_no.png",
         "pagePath": "pages/me/me",

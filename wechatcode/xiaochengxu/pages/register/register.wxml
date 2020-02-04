@@ -11,7 +11,7 @@
           </view>
         </view>
         <view class="weui-cell__bd">
-          <input bindinput="srzh" class="weui-input" placeholder="请输入帐号"></input>
+          <input bindinput="srsjh" class="weui-input" placeholder="请输入手机号"></input>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -38,8 +38,6 @@
     </view>
     <button bindtap="register" class="weui-btn" disabled="{{disabled}}" style="background:{{disabled?'#7EC0EE':'rgb(75,160,228)'}};" type="primary">{{regtext}}</button>
   </view>
-  <view bindtap="wxAuthLogin" class="ft logincu">
-    <view>已有账号？ 去登录</view>
-  </view>
+  
 </view>
 

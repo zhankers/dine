@@ -1,5 +1,7 @@
 package com.dine.utils;
 
+import com.dine.constant.CookieConstant;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +20,7 @@ public class CookieUtil {
      * @param value
      * @param maxAge
      */
-    public static void set(HttpServletResponse response,
-                           String name,
-                           String value,
-                           int maxAge) {
+    public static void set(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
         cookie.setMaxAge(maxAge);
@@ -42,6 +41,11 @@ public class CookieUtil {
         }else {
             return null;
         }
+    }
+
+    public static String getUserId(HttpServletRequest request) {
+        Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
+        return JwtUtil.getUserId(cookie.getValue());
     }
 
     /**

@@ -9,6 +9,7 @@ import com.dine.exception.SellException;
 import com.dine.form.SellerForm;
 import com.dine.repository.SellerInfoRepository;
 import com.dine.utils.CookieUtil;
+import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -50,7 +51,9 @@ public class AdminUserController {
         SellerInfo sellerInfo = repository.findByPhone(phone);
         log.info("商家信息={}", sellerInfo);
         if (sellerInfo != null && sellerInfo.getPassword().equals(password)) {
-            String token = UUID.randomUUID().toString();
+            // String token = UUID.randomUUID().toString();
+            String token = JwtUtil.sign(String.valueOf(sellerInfo.getSellerId()));
+
             log.info("登录成功的token={}", token);
             Integer expire = RedisConstant.EXPIRE;
             //3. 设置token至cookie

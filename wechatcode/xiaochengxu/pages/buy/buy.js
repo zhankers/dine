@@ -420,21 +420,30 @@ Page({
       return;
     }
 
-    let userInfo = app.globalData.userInfo;
-    if (!userInfo || !userInfo.nickName) {
+    let token = app.globalData.token ? app.globalData.token : (app.globalData.token = wx.getStorageSync('token'), wx.getStorageSync('token'));
+    let openid = app.globalData.openid ? app.globalData.openid : (app.globalData.openid = wx.getStorageSync('openid'), wx.getStorageSync('openid'));
+    let userInfo = app.globalData.userInfo ? app.globalData.userInfo : (app.globalData.userInfo = wx.getStorageSync('user'), wx.getStorageSync('user'));
+
+    if (!userInfo || !token) {
+      
+    
       wx.showModal({
         title: '请登录',
         content: '请到个人中心登录',
         showCancel: false, //去掉取消按钮
         success: function (res) {
           if (res.confirm) {
-            wx.switchTab({
-              url: '../me/me',
+            // wx.switchTab({
+            //   url: '../me/me',
+            // })
+            wx.navigateTo({
+              url: '../login/login',
             })
           }
         }
       })
       return;
+
     }
     wx.navigateTo({
       url: '../confirmOrder/confirmOrder?tableNum=' + tableNum

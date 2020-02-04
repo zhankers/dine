@@ -7,19 +7,19 @@ Page({
    */
   data: {
     disabled: !0,
-    zh: "",
+    sjh: "",
     mm: "",
     confirmm: "",
     regtext: "注册"
   },
 
   /**
-   * 输入账号
+   * 输入手机号
    */
-  srzh: function(t) {
+  srsjh: function(t) {
     console.log(t.detail.value), this.setData({
-      zh: t.detail.value
-    }), "" != this.data.zh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
+      sjh: t.detail.value
+    }), "" != this.data.sjh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
       disabled: !1
     }) : this.setData({
       disabled: !0
@@ -32,7 +32,7 @@ Page({
   srmm: function(t) {
     console.log(t.detail.value), this.setData({
       mm: t.detail.value
-    }), "" != this.data.zh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
+    }), "" != this.data.sjh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
       disabled: !1
     }) : this.setData({
       disabled: !0
@@ -45,7 +45,7 @@ Page({
   qrmm: function(t) {
     console.log(t.detail.value), this.setData({
       confirmm: t.detail.value
-    }), "" != this.data.zh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
+    }), "" != this.data.sjh && "" != this.data.mm && "" != this.data.confirmm ? this.setData({
       disabled: !1
     }) : this.setData({
       disabled: !0
@@ -53,7 +53,7 @@ Page({
   },
 
   register: function() {
-    var zh = this.data.zh,
+    var sjh = this.data.sjh,
       mm = this.data.mm,
       confirmm = this.data.confirmm;
 
@@ -68,7 +68,7 @@ Page({
       url: app.globalData.baseUrl + '/user/register',
       method: "POST",
       data: {
-        username: zh,
+        username: sjh,
         password: mm,
         confirmm: confirmm
       },

@@ -11,7 +11,7 @@
           </view>
         </view>
         <view class="weui-cell__bd">
-          <input bindinput="srzh" class="weui-input" placeholder="请输入帐号"></input>
+          <input bindinput="srsjh" class="weui-input" placeholder="请输入手机号"></input>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">

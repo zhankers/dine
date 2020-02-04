@@ -1,20 +1,28 @@
 <!--pages/me/me.wxml-->
 <view class="header" wx:if="{{isShowUserName}}" bindtap='change'>
- <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
- <text class="userinfo-nickname">{{userInfo.realname?userInfo.realname:userInfo.nickName}}</text>
- <!-- <text class="userinfo-nickname">{{userInfo.openid}}</text> -->
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+  <!-- <text class="userinfo-nickname">{{userInfo.realname?userInfo.realname:userInfo.nickName}}</text> -->
+  <text class="userinfo-nickname">{{userInfo.username?userInfo.username:userInfo.nickName}}</text>
+  <!-- <text class="userinfo-nickname">{{userInfo.openid}}</text> -->
 </view>
 <!--如果用户没有授权，显示登陆按钮  -->
-<view wx:if="{{!isShowUserName}}" class="btn-login">
- <button open-type="getUserInfo" lang="zh_CN" type="primary" bindgetuserinfo="onGotUserInfo">授权登陆</button>
-</view>
+<!-- <view wx:if="{{!isShowUserName}}" class="btn-login">
+  <button open-type="getUserInfo" lang="zh_CN" type="primary" bindgetuserinfo="onGotUserInfo">授权登陆</button>
+</view> -->
 <view class='line_5px' />
 <!-- 我的订单 -->
-<view class='my_item' bindtap="goToMyOrder" >
- <text>我的订单</text>
- <view class='right_arrow' />
+<view class='my_item' bindtap="goToMyOrder">
+  <text>我的订单</text>
+  <view class='right_arrow' />
 </view>
 <view class='my_item' bindtap="goToMyComment">
- <text>我的评价</text>
- <view class='right_arrow' />
+  <text>我的评价</text>
+  <view class='right_arrow' />
+</view>
+<view class="btn-login" wx:if="{{isLogining}}">
+<button class='logout' type="warn" bindtap="logout" hover-class="other-button-hover"> 退出登录 </button>
+</view>
+<view class="btn-login" wx:if="{{!isLogining}}">
+  <!-- <button open-type="getUserInfo" lang="zh_CN" type="primary" bindgetuserinfo="onGotUserInfo">登录</button> -->
+  <button bindtap="goToLogin" lang="zh_CN" type="primary">登录</button>
 </view>

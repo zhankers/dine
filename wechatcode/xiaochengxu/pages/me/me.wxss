@@ -12,9 +12,10 @@ page {
   align-items: center;
   background: white;
 }
-.btn-login{
- padding: 10%;
- background: white;
+
+.btn-login {
+  padding: 10%;
+  /* background: white; */
 }
 
 .userinfo-avatar {
@@ -27,8 +28,13 @@ page {
   margin-top: 20rpx;
   font-size: 38rpx;
 }
-.runner_desc{
- font-size: 10pt;
- color: red
+
+.runner_desc {
+  font-size: 10pt;
+  color: red;
 }
 
+.logout {
+  margin-top: 80rpx;
+  
+}
