@@ -1,3 +1,4 @@
+var app = getApp()
 // pages/index2/index2.js
 Page({
 
@@ -7,6 +8,13 @@ Page({
   data: {
 
   },
+
+  test:function(){
+    console.log("TEST__")
+      
+    
+   
+  }, 
 
   /**
    * 生命周期函数--监听页面加载

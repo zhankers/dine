@@ -12,11 +12,68 @@ Page({
    * 微信授权登录
    */
   wxAuthLogin: function() {
-    // wx.makePhoneCall({
-    //   phoneNumber: this.data.tel
-    // });
-    wx.showToast({
-      title: '微信授权登录',
+    wx.getUserInfo({
+      success: function (response) {
+        console.log("userinfo:" + response.userInfo)
+
+        wx.login({
+          success: function (res) {
+            console.log("res:" + res.code)
+            if (res.code) {
+              wx.request({
+                url: app.globalData.baseUrl + '/user/wx-login',
+                method: "post",
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  code: res.code,
+                  username: response.userInfo.nickName,
+                  avatarUrl: response.userInfo.avatarUrl,
+                  city: response.userInfo.city,
+                  gender: response.userInfo.gender,
+                  province: response.userInfo.province,
+                  country: response.userInfo.country,
+                },
+
+                success: function (res) {
+                  var resultData = res.data.data
+                  if (200 != res.statusCode && 201 != res.statusCode) {
+                    wx.showModal({
+                      title: "提示",
+                      content: "授权登录失败，请重试"
+                    })
+                    return
+                  }
+
+                  var openId = resultData.openid
+                  var token = resultData.token
+                  var userInfo = resultData.userInfo
+                  app.globalData.openid = openId
+                  app.globalData.token = token
+                  app.globalData.userInfo = userInfo
+
+                  wx.setStorageSync("token", token)
+                  wx.setStorageSync('openid', openId)
+                  wx.setStorageSync('user', userInfo)
+
+                  wx.showToast({
+                    title: '微信授权登录',
+                  })
+
+
+
+                  wx.redirectTo({
+                    url: "../buy/buy"
+                  })
+
+                }
+              })
+            }
+          }
+        })
+
+      }
     })
   },
 
@@ -73,11 +130,12 @@ Page({
             disabled: !1
           })
 
-        if (500 == t.data.status) {
+        if (200 != t.statusCode && 201 != t.statusCode) {
           wx.showModal({
             title: "提示",
             content: "您的帐号或密码错误，请重新输入"
           })
+          return
         } else {
           var resultData = t.data.data
 

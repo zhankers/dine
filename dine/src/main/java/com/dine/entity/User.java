@@ -34,6 +34,11 @@ public class User {
     private String zhuohao;
     private String renshu;
 
+    private String city;
+    private Integer gender;
+    private String province;
+    private String country;
+
     private Date createTime;
     private Date updateTime;
 }

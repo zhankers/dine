@@ -19,16 +19,26 @@ public class UserForm {
     /**
      * 买家手机号
      */
-    @NotEmpty(message = "手机号必填")
     private String phone;
 
 
     /**
      * 买家微信openid
      */
-    @NotEmpty(message = "openid必填")
+    // @NotEmpty(message = "openid必填")
     private String openid;
+
+    private String token;
+    private String avatarUrl;
+    private String city;
+    private Integer gender;
+    private String province;
+    private String country;
 
     private String zhuohao;
     private String renshu;
+
+    private String code;
+    private String appId;
+    private String secret;
 }

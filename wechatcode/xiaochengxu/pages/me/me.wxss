@@ -38,3 +38,8 @@ page {
   margin-top: 80rpx;
   
 }
+
+.my_item .center_map {
+  margin-right: 16rpx;
+  height:46rpx;width:46rpx;
+}

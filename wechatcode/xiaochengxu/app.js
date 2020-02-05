@@ -4,9 +4,9 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
-    token:null,
+    token: null,
     baseUrl: 'http://localhost:8080/sell' //本地调试
-    // baseUrl: 'http://zhanke.site:8080/sell/' //真机调试,这里的ip地址一定是你电脑的ip
+    //baseUrl: 'http://zhanke.site:8080/sell/' //真机调试,这里的ip地址一定是你电脑的ip
   },
   onLaunch: function() {
     //云开发初始化

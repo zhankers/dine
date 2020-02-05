@@ -36,12 +36,6 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "image/home_yes.png",
-        "iconPath": "image/home_no.png",
-        "pagePath": "pages/index2/index2",
-        "text": "TEST2"
-      },
-      {
         "selectedIconPath": "image/me_yes.png",
         "iconPath": "image/me_no.png",
         "pagePath": "pages/me/me",

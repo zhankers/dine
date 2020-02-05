@@ -9,7 +9,7 @@
 </view>
 <view>饭店地址：北京市延庆县康庄镇XXX饭店</view>
 <view class="category-panel1">
-  <view class="category-panel2" style="border:1px solid #f00">
+  <view class="category-panel2" style="border:1px solid #f00" bindtap="test">
     <image class="category-item-image" src="/image/scan.png" style="border:1px solid #00f" />
     <view class="category-item" style="border:1px solid #0f0">
       <text class="category-item-title">南昌海底捞火锅店(万达店)</text>

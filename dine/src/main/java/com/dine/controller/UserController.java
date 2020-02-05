@@ -1,5 +1,7 @@
 package com.dine.controller;
 
+import com.dine.config.ProjectUrlConfig;
+import com.dine.config.WechatAccountConfig;
 import com.dine.constant.CookieConstant;
 import com.dine.constant.RedisConstant;
 import com.dine.entity.User;
@@ -9,12 +11,29 @@ import com.dine.form.UserForm;
 import com.dine.listener.SessionListener;
 import com.dine.repository.UserRepository;
 import com.dine.utils.CookieUtil;
+import com.dine.utils.HttpUtil;
+import com.dine.utils.JsonUtil;
 import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
 import com.dine.utils.ResultVOUtil;
 import com.dine.vo.ResultVO;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jndi.toolkit.url.Uri;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -29,8 +48,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -44,6 +68,10 @@ public class UserController {
 
     @Autowired
     UserRepository repository;
+    @Autowired
+    WechatAccountConfig wechatAccountConfig;
+    @Autowired
+    ProjectUrlConfig projectUrlConfig;
 
     /**
      * 创建用户
@@ -53,7 +81,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/save")
-    public ResultVO create(@Valid UserForm userForm, BindingResult bindingResult) {
+    public ResultVO create(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("参数不正确, userForm={}", userForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
@@ -65,10 +93,14 @@ public class UserController {
         }
         user.setUsername(userForm.getUsername());
         user.setOpenid(userForm.getOpenid());
+        user.setToken(userForm.getToken());
+        user.setAvatarUrl(userForm.getAvatarUrl());
+        user.setCity(userForm.getCity());
+        user.setCountry(userForm.getCountry());
+        user.setProvince(userForm.getProvince());
         user.setPhone(userForm.getPhone());
         user.setZhuohao(userForm.getZhuohao());
         user.setRenshu(userForm.getRenshu());
-
         return ResultVOUtil.success(repository.save(user));
     }
 
@@ -115,6 +147,82 @@ public class UserController {
 
     /**
      * 用户登录
+     */
+    @PostMapping("/wx-login")
+    public ResultVO wxAuthorization(@RequestBody @Valid UserForm userForm, HttpServletRequest request) {
+        log.info("userForm:{}", userForm);
+        Map<String, Object> result = new HashMap<>();
+        String appId = userForm.getAppId();
+        String code = userForm.getCode();
+        String secret = userForm.getSecret();
+
+        if (StringUtils.isEmpty(code)) {
+            throw new SellException(ResultEnum.LOGIN_FAIL);
+        }
+
+        if (StringUtils.isEmpty(appId)) {
+            appId = wechatAccountConfig.getMpAppId();
+        }
+
+        if (StringUtils.isEmpty(secret)) {
+            secret = wechatAccountConfig.getMpAppSecret();
+        }
+
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("appid", appId));
+        params.add(new BasicNameValuePair("secret", secret));
+        params.add(new BasicNameValuePair("js_code", code));
+        params.add(new BasicNameValuePair("grant_type", "authorization_code"));
+
+        String responseResult = HttpUtil.doGet(projectUrlConfig.wechatMpAuthorize, params);
+        JsonNode jsonNode = (JsonNode)JsonUtil.toNode(responseResult);
+        if (Objects.isNull(jsonNode)) {
+            throw new SellException(ResultEnum.LOGIN_FAIL);
+        }
+        String sessionKey = jsonNode.get("session_key").asText();
+        String openId = jsonNode.get("openid").asText();
+
+        if (StringUtils.isEmpty(sessionKey) && StringUtils.isEmpty(openId)) {
+            throw new SellException(ResultEnum.LOGIN_FAIL);
+        }
+
+        User user = repository.findByOpenid(openId);
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", openId);
+        session.setAttribute("session_key", sessionKey);
+        String token = JwtUtil.sign(openId);
+        log.info("微信登录成功的token={}", token);
+
+        if (Objects.isNull(user)) {
+            user = new User();
+            user.setUsername(userForm.getUsername());
+            user.setOpenid(openId);
+            user.setToken(token);
+            user.setAvatarUrl(userForm.getAvatarUrl());
+            user.setCity(userForm.getCity());
+            user.setCountry(userForm.getCountry());
+            user.setProvince(userForm.getProvince());
+            user.setPhone(userForm.getPhone());
+            user.setZhuohao(userForm.getZhuohao());
+            user.setRenshu(userForm.getRenshu());
+            user = repository.save(user);
+        } else {
+            user.setToken(token);
+            user.setUpdateTime(new Date());
+            repository.updateTokenByOpenid(openId, token);
+        }
+
+        result.put("openid", openId);
+        result.put("token", token);
+        result.put("session_key", sessionKey);
+        result.put("userInfo", user);
+        result.put("state", 1);
+
+        return ResultVOUtil.success(result);
+    }
+
+    /**
+     * 用户登出
      */
     @GetMapping("/logout")
     public ResultVO logout(HttpServletRequest request) {
