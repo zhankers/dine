@@ -4,11 +4,14 @@ import com.dine.config.ProjectUrlConfig;
 import com.dine.config.WechatAccountConfig;
 import com.dine.constant.CookieConstant;
 import com.dine.constant.RedisConstant;
+import com.dine.entity.Address;
 import com.dine.entity.User;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
+import com.dine.form.AddressForm;
 import com.dine.form.UserForm;
 import com.dine.listener.SessionListener;
+import com.dine.repository.AddressRepository;
 import com.dine.repository.UserRepository;
 import com.dine.utils.CookieUtil;
 import com.dine.utils.HttpUtil;
@@ -17,29 +20,19 @@ import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
 import com.dine.utils.ResultVOUtil;
 import com.dine.vo.ResultVO;
-
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jndi.toolkit.url.Uri;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.RequestBuilder;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,15 +41,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 用户相关
@@ -68,6 +59,8 @@ public class UserController {
 
     @Autowired
     UserRepository repository;
+    @Autowired
+    AddressRepository addressRepository;
     @Autowired
     WechatAccountConfig wechatAccountConfig;
     @Autowired
@@ -146,7 +139,7 @@ public class UserController {
     }
 
     /**
-     * 用户登录
+     * 微信授权登录
      */
     @PostMapping("/wx-login")
     public ResultVO wxAuthorization(@RequestBody @Valid UserForm userForm, HttpServletRequest request) {
@@ -190,6 +183,7 @@ public class UserController {
         HttpSession session = request.getSession();
         session.setAttribute("userId", openId);
         session.setAttribute("session_key", sessionKey);
+        SessionListener.addSession(session);
         String token = JwtUtil.sign(openId);
         log.info("微信登录成功的token={}", token);
 
@@ -257,6 +251,60 @@ public class UserController {
         User result = repository.save(user);
 
         return ResultVO.success(result);
+    }
+
+    @PostMapping("/address")
+    public ResultVO addAddress(@RequestBody AddressForm addressForm ,BindingResult bindingResult,
+                               @RequestHeader("token") String token,
+                               HttpServletRequest request) {
+        log.info("addressForm: {} token: {}", addressForm, token);
+
+        if (bindingResult.hasErrors()) {
+            log.error("参数不正确, addressForm={}", addressForm);
+            throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
+        }
+
+        if (StringUtils.isEmpty(token)) {
+            log.error("token is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+
+        String openid = JwtUtil.getUserId(token);
+
+        Address oldAddress = addressRepository.findByUserIdAndUserNameAndTelNumberAndProvinceNameAndCityNameAndCountyNameAndDetailInfo(
+                openid, addressForm.getUserName(), addressForm.getTelNumber(), addressForm.getProvinceName(), addressForm.getCityName(),
+                addressForm.getCountyName(), addressForm.getDetailInfo());
+
+        List<Address> addresses = addressRepository.findByUserId(openid);
+        if (!CollectionUtils.isEmpty(addresses)) {
+            List<Address> collect = addresses.stream().peek(addr -> addr.setActive(0)).collect(Collectors.toList());
+            addressRepository.saveAll(collect);
+        }
+
+        Address address = new Address();
+        if (Objects.isNull(oldAddress)) {
+            BeanUtils.copyProperties(addressForm, address);
+        } else {
+            address = oldAddress;
+        }
+
+        address.setActive(1);
+        address.setUserId(openid);
+        return ResultVO.success(addressRepository.saveAndFlush(address));
+    }
+
+    @GetMapping("/address")
+    public ResultVO getAddress(@RequestHeader("token") String token) {
+        if (StringUtils.isEmpty(token)) {
+            log.error("token is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+        String openid = JwtUtil.getUserId(token);
+        List<Address> addresses = addressRepository.findByUserIdAndActive(openid, 1);
+        if (CollectionUtils.isEmpty(addresses)) {
+            return ResultVO.success(null);
+        }
+        return ResultVO.success(addresses.get(0));
     }
 
 }

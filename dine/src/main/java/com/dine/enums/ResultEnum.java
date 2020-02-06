@@ -44,6 +44,8 @@ public enum ResultEnum {
 
     REG_FAIL(27, "注册失败, 注册信息不正确"),
 
+    TOKEN_ILLEGAL(28, "Token信息无效"),
+
     LOGOUT_SUCCESS(26, "登出成功"),
     ;
 

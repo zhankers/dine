@@ -6,7 +6,7 @@ App({
     openid: null,
     token: null,
     baseUrl: 'http://localhost:8080/sell' //本地调试
-    //baseUrl: 'http://zhanke.site:8080/sell/' //真机调试,这里的ip地址一定是你电脑的ip
+    //baseUrl: 'http://zhanke.site:8080/sell' //真机调试,这里的ip地址一定是你电脑的ip
   },
   onLaunch: function() {
     //云开发初始化
@@ -71,7 +71,7 @@ App({
   },
 
   _checkOpenid() {
-    let openid = this.globalData.openid;
+    let openid = this.globalData.openid ? this.globalData.openid : (this.globalData.openid = wx.getStorageSync('openid'), wx.getStorageSync('openid'));
     if (!openid) {
       app.getOpenid();
       wx.showLoading({
@@ -82,6 +82,12 @@ App({
       return openid;
     }
   },
+
+  _checkToken: function() {
+    let app = this
+    return app.globalData.token ? app.globalData.token : (app.globalData.token = wx.getStorageSync('token'), wx.getStorageSync('token'));
+  },
+
   // 保存userinfo
   _saveUserInfo: function(user) {
     this.globalData.userInfo = user;

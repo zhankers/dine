@@ -1,13 +1,13 @@
 <view class="main">
-  <image class="bgimg" src="../images/login@3x.png"></image>
+  <image class="bgimg" src="/image/login@3x.png"></image>
   <view class="headwz">{{bqxx.pt_name}}</view>
-  <image class="hdimg" src="../images/login1@3x.png"></image>
+  <image class="hdimg" src="/image/login1@3x.png"></image>
   <view class="login">
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <image src="../images/zh@3x.png"></image>
+            <image src="/image/zh@3x.png"></image>
           </view>
         </view>
         <view class="weui-cell__bd">
@@ -17,7 +17,7 @@
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <image src="../images/mima@3x.png"></image>
+            <image src="/image/mima@3x.png"></image>
           </view>
         </view>
         <view class="weui-cell__bd">
@@ -27,7 +27,7 @@
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">
-            <image src="../images/mima@3x.png"></image>
+            <image src="/image/mima@3x.png"></image>
           </view>
         </view>
         <view class="weui-cell__bd">

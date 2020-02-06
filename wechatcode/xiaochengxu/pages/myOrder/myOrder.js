@@ -115,7 +115,7 @@ Page({
       data: {
         orderId: orderId,
         openid: openid,
-        name: app.globalData.userInfo.nickName,
+        name: app.globalData.userInfo.username,
         avatarUrl: app.globalData.userInfo.avatarUrl,
         content: content
       },

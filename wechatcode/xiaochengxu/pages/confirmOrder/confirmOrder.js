@@ -16,6 +16,7 @@ Page({
   //页面的初始数据
   data: {
     tableNum: "",
+    address: "",
     confirmOrder: [],
     // 输入框中的用餐人数
     diner_num: 0,
@@ -47,6 +48,8 @@ Page({
       totalPrice: this.data.totalPrice.toFixed(2),
       totalNum: this.data.totalNum
     })
+
+  
     // wx.getSystemInfo({
     //   success: function (res) {
     //     that.setData({
@@ -55,6 +58,10 @@ Page({
     //     });
     //   }
     // });
+  },
+
+  onShow: function() {
+    this.getAddress()
   },
   // 点击数字，输入框出现对应数字
   getDinnerNUM: function(e) {
@@ -165,8 +172,8 @@ Page({
       },
       data: {
         openid: app.globalData.openid,
-        name: app.globalData.userInfo.nickName,
-        phone: "15805849785",
+        name: app.globalData.userInfo.username,
+        phone: this.data.address.telNumber,
         address: tableNum,
         items: goods_josn
       },
@@ -205,6 +212,68 @@ Page({
 
       }
     })
+
+  },
+
+  getAddress: function() {
+    var that = this
+    let curAddress = wx.getStorageSync('address')
+    let token = app._checkToken()
+    that.setData({
+      address: curAddress
+    });
+    
+    if (!curAddress) {
+      wx.request({
+        url: app.globalData.baseUrl + '/user/address',
+        header: {
+          token: token
+        },
+        success: function (response) {
+          console.log(response.data.data)
+          if (response.data.data) {
+            wx.setStorageSync('address', response.data.data)
+            that.setData({
+              address: curAddress
+            });
+          } else {
+            that.address()
+          }
+         
+        }
+      })
+    }
+  },
+
+  address: function () {
+    if (wx.chooseAddress) {
+      let token = app._checkToken()
+      // let openid = app._checkOpenid()
+      wx.chooseAddress({
+        success: function (res) {
+          wx.request({
+            url: app.globalData.baseUrl + '/user/address',
+            header: {
+              token: token
+            },
+            method: "post",
+            data: res,
+            success: function (response) {
+              console.log(response.data.data)
+              wx.setStorageSync('address', response.data.data)
+              that.setData({
+                address: curAddress
+              });
+            }
+          })
+        },
+        fail: function (err) {
+          console.log(JSON.stringify(err))
+        }
+      })
+    } else {
+      console.log('当前微信版本不支持chooseAddress');
+    }
 
   },
 

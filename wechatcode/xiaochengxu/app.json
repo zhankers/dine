@@ -9,7 +9,6 @@
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
     "pages/register/register",
-    "pages/index2/index2",
     "pages/storelist/storelist"
   ],
   "window": {

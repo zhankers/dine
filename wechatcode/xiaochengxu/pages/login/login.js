@@ -59,6 +59,7 @@ Page({
 
                   wx.showToast({
                     title: '微信授权登录',
+                    duration: 2000
                   })
 
 

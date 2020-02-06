@@ -24,6 +24,53 @@ Page({
     }
   },
 
+  address: function() {
+    if (wx.chooseAddress) {
+
+      let token = app._checkToken()
+
+      // let openid = app._checkOpenid()
+
+      if(!token) {
+        wx.showToast({
+          title: '请先登录',
+        })
+        return
+      }
+
+      wx.chooseAddress({
+        success: function(res) {
+          wx.request({
+            url: app.globalData.baseUrl + '/user/address',
+            header: {
+              token : token
+            },
+            method: "post",
+            data: res,
+            success: function(response) {
+              console.log(responese.data.data)
+              wx.setStorageSync('address', responese.data.data)
+            }
+          })
+        },
+        fail: function(err) {
+          console.log(JSON.stringify(err))
+        }
+      })
+    } else {
+      console.log('当前微信版本不支持chooseAddress');
+    }
+  
+  },
+
+  getCoupon: function() {
+
+  },
+
+  myCoupon: function() {
+
+  },
+
   goToMyOrder: function() {
     wx.navigateTo({
       url: '../myOrder/myOrder',
@@ -35,22 +82,12 @@ Page({
       url: '../mycomment/mycomment?type=1',
     })
   },
+
+
   change() {
     wx.navigateTo({
       url: '../change/change',
     })
-  },
-
-
-  onShow(options) {
-    console.log("个人show", options)
-    var user = app.globalData.userInfo;
-    if (user) {
-      this.setData({
-        isShowUserName: true,
-        userInfo: user,
-      })
-    }
   },
 
   goToLogin: function() {
@@ -86,7 +123,7 @@ Page({
 
   },
 
-  onShow: function onShow() {
+  onShow: function() {
     console.log("个人onShow")
     var that = this;
     var token = app.globalData.token ? app.globalData.token : (app.globalData.token = wx.getStorageSync('token'), wx.getStorageSync('token'));

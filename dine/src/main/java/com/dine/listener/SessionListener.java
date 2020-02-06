@@ -1,25 +1,27 @@
 package com.dine.listener;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 public class SessionListener implements HttpSessionListener {
 
 	private static Map<String, HttpSession> M_USERHASHMAP = new ConcurrentHashMap<>();
 
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
-		System.out.println("---Session start at " + new Date() + "---");
+		log.info("---Session start at " + new Date() + "---");
 	}
 
 	@Override
 	public void sessionDestroyed(HttpSessionEvent se) {
-		System.out.println("---Session end at " + new Date() + "---");
+		log.info("---Session end at " + new Date() + "---");
 	}
 
 	public static boolean addSession(HttpSession httpSession) {

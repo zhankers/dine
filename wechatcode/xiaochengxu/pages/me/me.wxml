@@ -10,22 +10,22 @@
   <button open-type="getUserInfo" lang="zh_CN" type="primary" bindgetuserinfo="onGotUserInfo">授权登陆</button>
 </view> -->
 <view class='line_5px' />
-<!-- 我的订单 -->
-<view class='my_item' bindtap="goToMyOrder">
-  <image class="center_map" src="/image/dizhi.png" style="height:54rpx;width:54rpx"></image>
+
+<view class='my_item' bindtap="address">
+  <image class="center_map" src="/image/dizhi.png"></image>
   <text>收货地址</text>
   <view class='right_arrow' />
 </view>
 
 
-<view class='my_item' bindtap="goToMyOrder">
-  <image class="center_map" src="/image/youhuiquan@2x.png" style="height:46rpx;width:46rpx"></image>
+<view class='my_item' bindtap="getCoupon">
+  <image class="center_map" src="/image/youhuiquan@2x.png"></image>
   <text>领取优惠券</text>
   <view class='right_arrow' />
 </view>
 
 
-<view class='my_item' bindtap="goToMyOrder">
+<view class='my_item' bindtap="myCoupon">
   <image class="center_map" src="/image/quan@3x.png"></image>
   <view>我的优惠券</view>
   <view class='right_arrow' />
@@ -33,7 +33,7 @@
 
  
 
-
+<!-- 我的订单 -->
 <view class='my_item' bindtap="goToMyOrder">
   <image class="center_map" src="/image/order.png"></image>
   <text>我的订单</text>
