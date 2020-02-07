@@ -1,7 +1,7 @@
 package com.dine.controller;
 
 import com.dine.config.ProjectUrlConfig;
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.dine.entity.Picture;
 import com.dine.exception.SellException;
 import com.dine.form.PictureForm;
@@ -40,7 +40,7 @@ public class PictureController {
 
 
     @GetMapping("/getAll")
-    public ResultVO getPictureInfo() {
+    public RestResponse getPictureInfo() {
         List<Picture> pictures = repository.findAll();
         return ResultVOUtil.success(pictures);
     }

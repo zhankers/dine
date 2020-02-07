@@ -74,12 +74,31 @@ Page({
       },
       success: function(res) {
         console.log(res)
-        if (res && res.data && res.data.data && res.data.data.length > 0) {
-            
+        if (res && res.data && res.data.data && res.data.data.id) {
+          wx.showToast({
+            title: '注册成功，将跳转登录页',
+            duration: 2000
+          })
 
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showModal({
+            title: "提示",
+            content: "注册失败，请重试"
+          })
+          return
         }
       },
-
+      fail: function(err){
+        console.log(JSON.stringify(err))
+        wx.showModal({
+          title: "提示",
+          content: "注册失败，请重试"
+        })
+        return
+      }
 
 
     })

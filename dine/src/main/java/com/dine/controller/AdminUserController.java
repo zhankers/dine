@@ -10,11 +10,9 @@ import com.dine.form.SellerForm;
 import com.dine.repository.SellerInfoRepository;
 import com.dine.utils.CookieUtil;
 import com.dine.utils.JwtUtil;
-import com.dine.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +28,6 @@ import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 
 @RestController
@@ -51,7 +48,6 @@ public class AdminUserController {
         SellerInfo sellerInfo = repository.findByPhone(phone);
         log.info("商家信息={}", sellerInfo);
         if (sellerInfo != null && sellerInfo.getPassword().equals(password)) {
-            // String token = UUID.randomUUID().toString();
             String token = JwtUtil.sign(String.valueOf(sellerInfo.getSellerId()));
 
             log.info("登录成功的token={}", token);

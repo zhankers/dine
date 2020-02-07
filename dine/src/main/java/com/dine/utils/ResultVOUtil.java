@@ -1,26 +1,26 @@
 package com.dine.utils;
 
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 
 
 public class ResultVOUtil {
 
-    public static ResultVO success(Object object) {
-        ResultVO resultVO = new ResultVO();
-        resultVO.setData(object);
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-        return resultVO;
+    public static RestResponse success(Object object) {
+        RestResponse restResponse = new RestResponse();
+        restResponse.setData(object);
+        restResponse.setCode(0);
+        restResponse.setMsg("成功");
+        return restResponse;
     }
 
-    public static ResultVO success() {
+    public static RestResponse success() {
         return success(null);
     }
 
-    public static ResultVO error(Integer code, String msg) {
-        ResultVO resultVO = new ResultVO();
-        resultVO.setCode(code);
-        resultVO.setMsg(msg);
-        return resultVO;
+    public static RestResponse error(Integer code, String msg) {
+        RestResponse restResponse = new RestResponse();
+        restResponse.setCode(code);
+        restResponse.setMsg(msg);
+        return restResponse;
     }
 }

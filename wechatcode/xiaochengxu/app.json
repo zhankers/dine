@@ -8,7 +8,10 @@
     "pages/change/change",
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/coupons/coupons_details",
+    "pages/coupons/shop_coupons",
+    "pages/coupons/mine_coupons"
   ],
   "window": {
     "backgroundTextStyle": "light",

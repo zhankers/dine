@@ -64,11 +64,15 @@ Page({
   },
 
   getCoupon: function() {
-
+    wx.navigateTo({
+      url: '../coupons/shop_coupons',
+    })
   },
 
   myCoupon: function() {
-
+    wx.navigateTo({
+      url: '../coupons/mine_coupons',
+    })
   },
 
   goToMyOrder: function() {

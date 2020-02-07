@@ -1,6 +1,6 @@
 package com.dine.controller;
 
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.dine.entity.Comment;
 import com.dine.entity.OrderMaster;
 import com.dine.dto.OrderDTO;
@@ -45,11 +45,11 @@ public class CommentController {
      * @return
      */
     @PostMapping("/comment")
-    public ResultVO<Comment> detail(@RequestParam("openid") String openid,
-                                    @RequestParam("orderId") String orderId,
-                                    @RequestParam("name") String name,
-                                    @RequestParam("avatarUrl") String avatarUrl,
-                                    @RequestParam("content") String content) {
+    public RestResponse<Comment> detail(@RequestParam("openid") String openid,
+                                        @RequestParam("orderId") String orderId,
+                                        @RequestParam("name") String name,
+                                        @RequestParam("avatarUrl") String avatarUrl,
+                                        @RequestParam("content") String content) {
         if (StringUtils.isEmpty(openid) || StringUtils.isEmpty(orderId)) {
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
@@ -76,7 +76,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/commentList")
-    public ResultVO<List<Comment>> commentList() {
+    public RestResponse<List<Comment>> commentList() {
         List<Comment> all = repository.findAll();
         return ResultVOUtil.success(all);
     }
@@ -88,7 +88,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/userCommentList")
-    public ResultVO<List<Comment>> userCommentList(@RequestParam("openid") String openid) {
+    public RestResponse<List<Comment>> userCommentList(@RequestParam("openid") String openid) {
         List<Comment> all = repository.findAllByOpenid(openid);
         return ResultVOUtil.success(all);
     }

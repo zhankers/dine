@@ -1,6 +1,6 @@
 package com.dine.controller;
 
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.dine.converter.OrderForm2OrderDTOConverter;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.ResultEnum;
@@ -50,7 +50,7 @@ public class BuyerOrderController {
      * @return
      */
     @PostMapping("/create")
-    public ResultVO<Map<String, String>> create(@Valid OrderForm orderForm, BindingResult bindingResult, HttpServletRequest request) {
+    public RestResponse<Map<String, String>> create(@Valid OrderForm orderForm, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             log.error("【创建订单】参数不正确, orderForm={}", orderForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
@@ -77,8 +77,8 @@ public class BuyerOrderController {
      * @return
      */
     @GetMapping("/listByStatus")
-    public ResultVO<List<OrderDTO>> listByStatus(@RequestParam("openid") String openid,
-                                                 @RequestParam(value = "orderStatus", defaultValue = "0") Integer orderStatus) {
+    public RestResponse<List<OrderDTO>> listByStatus(@RequestParam("openid") String openid,
+                                                     @RequestParam(value = "orderStatus", defaultValue = "0") Integer orderStatus) {
         if (StringUtils.isEmpty(openid)) {
             log.error("【查询订单列表】openid为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
@@ -96,7 +96,7 @@ public class BuyerOrderController {
      * @return
      */
     @GetMapping("/detail")
-    public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
+    public RestResponse<OrderDTO> detail(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
@@ -109,7 +109,7 @@ public class BuyerOrderController {
      * @return
      */
     @PostMapping("/sure")
-    public ResultVO sure(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
+    public RestResponse sure(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
         return ResultVOUtil.success();
     }
@@ -121,7 +121,7 @@ public class BuyerOrderController {
      * @return
      */
     @PostMapping("/cancel")
-    public ResultVO cancel(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
+    public RestResponse cancel(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
         return ResultVOUtil.success();
     }
