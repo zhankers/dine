@@ -1,5 +1,5 @@
 <view>
-  <swiper indicator-dots="{{true}}" indicator-color="#a5e8d0" autoplay="true" circular="true">
+  <swiper indicator-dots="{{false}}" indicator-color="#a5e8d0" autoplay="true" circular="true">
     <block wx:for="{{banner}}" wx:key="banner">
       <swiper-item>
         <image src='{{item.picUrl}}' mode="aspectFill" style="width:100%;height:100%;" />
@@ -7,7 +7,8 @@
     </block>
   </swiper>
 </view>
-<view>饭店地址：北京市延庆县康庄镇XXX饭店</view>
+<view class="store_content">
+<view class="store_title">饭店地址：北京市延庆县康庄镇XXX饭店</view>
 <view class="category-panel1">
   <view class="category-panel2">
     <view bindtap='btnclick1' class="category-item">
@@ -32,6 +33,7 @@
        <text class="category-item-text1">在线客服</text>
     </view>
   </view>
+</view>
 </view>
 
 

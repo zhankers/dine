@@ -214,15 +214,18 @@ Page({
     })
 
   },
-
+  dealAddress:function(data){
+    let tempaddress=''
+    tempaddress = data.provinceName + data.cityName + data.countyName + data.detailInfo
+    return tempaddress
+  },
   getAddress: function() {
     var that = this
     let curAddress = wx.getStorageSync('address')
     let token = app._checkToken()
     that.setData({
-      address: curAddress
+      address: this.dealAddress(curAddress)
     });
-    
     if (!curAddress) {
       wx.request({
         url: app.globalData.baseUrl + '/user/address',
@@ -234,7 +237,7 @@ Page({
           if (response.data.data) {
             wx.setStorageSync('address', response.data.data)
             that.setData({
-              address: curAddress
+              address: this.dealAddress(curAddress)
             });
           } else {
             that.address()
@@ -262,7 +265,7 @@ Page({
               console.log(response.data.data)
               wx.setStorageSync('address', response.data.data)
               that.setData({
-                address: curAddress
+                address: this.dealAddress(curAddress)
               });
             }
           })

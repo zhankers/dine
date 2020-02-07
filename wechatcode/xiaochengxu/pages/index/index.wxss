@@ -1,5 +1,13 @@
 /**index.wxss**/
 
+.store_content {
+  background-color: rgb(0, 160, 233);
+}
+
+.store_title {
+  text-align: center;
+}
+
 .category-panel1 {
   height: 300px;
   width: 100%;
