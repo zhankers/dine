@@ -3,7 +3,11 @@
 page {
   background: gainsboro;
 }
-
+.dineicon{
+  font-size: 28px;
+  margin-right: 8px;
+  color: #25CCF7;
+}
 .header {
   width: 100%;
   display: flex;

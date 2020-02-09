@@ -12,21 +12,21 @@
 <view class='line_5px' />
 
 <view class='my_item' bindtap="address">
-  <image class="center_map" src="/image/dizhi.png"></image>
+  <text class='dineicon icondizhi-copy '></text>
   <text>收货地址</text>
   <view class='right_arrow' />
 </view>
 
 
 <view class='my_item' bindtap="getCoupon">
-  <image class="center_map" src="/image/youhuiquan@2x.png"></image>
+  <text class='dineicon iconyouhuiquan '></text>
   <text>领取优惠券</text>
   <view class='right_arrow' />
 </view>
 
 
 <view class='my_item' bindtap="myCoupon">
-  <image class="center_map" src="/image/quan@3x.png"></image>
+  <text class='dineicon iconyouhuiquan '></text>
   <view>我的优惠券</view>
   <view class='right_arrow' />
 </view>
@@ -35,18 +35,18 @@
 
 <!-- 我的订单 -->
 <view class='my_item' bindtap="goToMyOrder">
-  <image class="center_map" src="/image/order.png"></image>
+  <text class='dineicon icondingdan '></text>
   <text>我的订单</text>
   <view class='right_arrow' />
 </view>
 <!-- 我的信息 -->
 <view class='my_item' bindtap="goToMyInfo">
-  <image class="center_map" src="/image/me_yes.png"></image>
+  <text class='dineicon icongaiicon- '></text>
   <text>我的信息</text>
   <view class='right_arrow' />
 </view>
 <view class='my_item' bindtap="goToMyComment">
-  <image class="center_map" src="/image/wushuju.png"></image>
+  <text class='dineicon iconduihuakuang '></text>
   <text>我的评价</text>
   <view class='right_arrow' />
 </view>

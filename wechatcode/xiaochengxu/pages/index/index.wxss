@@ -1,11 +1,16 @@
 /**index.wxss**/
-.swiper-container{
-  padding: 8px;
-}
-.store_content {
- 
+
+.dineicon {
+  color: #25ccf7;
+  font-size: 48px;
 }
 
+.swiper-container {
+  padding: 8px;
+}
+
+.store_content {
+}
 .store_title {
   text-align: center;
 }

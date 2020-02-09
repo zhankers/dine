@@ -51,6 +51,7 @@
 </view>
 <!-- 否则 -->
 <view wx:else class='cont_count'>
+  <text class='dineicon icon404-copy'></text>
   <label class='none_tab'>数据为空哦~~</label>
 </view>
 

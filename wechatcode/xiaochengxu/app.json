@@ -9,7 +9,7 @@
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
     "pages/register/register",
-    "pages/myInfo",
+    "pages/myInfo/myInfo",
     "pages/coupons/coupons_details",
     "pages/coupons/shop_coupons",
     "pages/coupons/mine_coupons"
@@ -22,18 +22,24 @@
   },
   "tabBar": {
     "color": "#a9b7b7",
-    "selectedColor": "#11cd6e",
+    "selectedColor": "#25CCF7",
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "image/home_yes.png",
-        "iconPath": "image/home_no.png",
+        "selectedIconPath": "image/home-s.jpg",
+        "iconPath": "image/home.jpg",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "selectedIconPath": "image/me_yes.png",
-        "iconPath": "image/me_no.png",
+        "selectedIconPath": "/image/order-s.jpg",
+        "iconPath": "/image/order.jpg",
+        "pagePath": "pages/myOrder/myOrder",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "image/me-s.jpg",
+        "iconPath": "image/me.jpg",
         "pagePath": "pages/me/me",
         "text": "我的"
       }

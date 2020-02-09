@@ -8,11 +8,11 @@
   </swiper>
 </view>
 <view class="store_content">
-<view class="store_title">饭店地址：北京市延庆县康庄镇XXX饭店</view>
+<!-- <view class="store_title">饭店地址：北京市延庆县康庄镇XXX饭店</view> -->
 <view class="category-panel1">
   <view class="category-panel2">
     <view bindtap='btnclick1' class="category-item">
-      <image class="category-item-image" src="/image/scan.png" />
+      <text class="dineicon iconsaoma"  />
       <text class="category-item-text">扫码点餐</text>
     </view>
   </view>

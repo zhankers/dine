@@ -3,8 +3,12 @@
 .navbar {
  display: flex;
  background: #fff;
+ padding: 0 8px;
 }
-
+.dineicon{
+  font-size: 60px;
+  color:#2196f3;
+}
 .none_tab {
  position: relative;
  top: 20rpx;
@@ -49,6 +53,8 @@
 .cont_count {
  padding-top: 6rpx;
  position: relative;
+ display: flex;
+ flex-direction: column;
  width: 100%;
  text-align: center;
  /* height: 620rpx; *//* border-bottom: 6rpx solid #ddd; */
