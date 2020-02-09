@@ -1,2 +1,16 @@
-<!--pages/myInfo.wxml-->
-<text>pages/myInfo.wxml</text>
+<view class="container">
+  <image lazy-load mode="widthFix" class='avator' src="{{selfinfo.avatarUrl}}"></image>
+  <view class='name'>{{selfinfo.username}}</view>
+  <view class="inforom">
+    <picker class='gender' bindchange="changeSex" value="{{sexs}}" range="{{sexs}}">
+      <view class="picker">
+        {{selfinfo.gender}}
+      </view>
+    </picker>
+    <picker class='location' mode="region" bindchange="changeRegion" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        {{region[0]}} {{region[1]}} {{region[2]}}
+      </view>
+    </picker>
+  </view>
+</view>

@@ -1,3 +1,4 @@
+let app = getApp();
 // pages/myInfo.js
 Page({
 
@@ -5,62 +6,70 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    sexs:['男','女'],
+    region:[],
+    selfinfo:{},
+    index: 0,
+    customItem: '全部'
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  changeSex: function (e) {
+    let temp = {}
+    temp.gender = this.data.sexs[e.detail.value]
+    this.setData({
+      selfinfo: { ...this.data.selfinfo, ...temp }
+    })
+    this.updateUserInfo(temp)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  changeRegion: function (e) {
+    let temp={}
+    temp.province = e.detail.value[0]
+    temp.city = e.detail.value[1]
+    this.setData({
+      selfinfo: {...this.data.selfinfo, ...temp}
+    })
+    this.setData({
+      region: [temp.province, temp.city, '龙岗区']
+    })
+    this.updateUserInfo(temp)
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getUserInfo()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  updateUserInfo:function(data){
+    let that = this
+    let token = app._checkToken()
+    wx.request({
+      url: app.globalData.baseUrl + '/user/info',
+      header: {
+        token: token
+      },
+      method: "post",
+      data: data,
+      success: function (response) {
+        console.log(response)
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  getUserInfo:function(){
+    let that=this
+    let token = app._checkToken()
+      wx.request({
+        url: app.globalData.baseUrl + '/user/info',
+        header: {
+          token: token
+        },
+        success: function (response) {
+          that.setData({
+            selfinfo: response.data.data,
+            region: [response.data.data.province, response.data.data.city,'龙岗区']
+          })
+        },
+        fail: function (err) {
+          console.log(response.data.data)
+        }
+      })
+    }
 })

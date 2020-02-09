@@ -76,7 +76,7 @@ Page({
   },
 
   goToMyOrder: function() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '../myOrder/myOrder',
     })
   },

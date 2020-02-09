@@ -1,1 +1,26 @@
-/* pages/myInfo.wxss */
+.container {
+  align-items: center;
+}
+
+.avator {
+  margin-top: 24px;
+  display: block;
+  width: 80px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 24px;
+}
+
+.inforom {
+  text-align: center;
+}
+
+.location {
+  margin-top: 24px;
+}
+
+.gender {
+  margin-top: 24px;
+}
