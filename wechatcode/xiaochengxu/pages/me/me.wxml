@@ -39,6 +39,12 @@
   <text>我的订单</text>
   <view class='right_arrow' />
 </view>
+<!-- 我的信息 -->
+<view class='my_item' bindtap="goToMyInfo">
+  <image class="center_map" src="/image/me_yes.png"></image>
+  <text>我的信息</text>
+  <view class='right_arrow' />
+</view>
 <view class='my_item' bindtap="goToMyComment">
   <image class="center_map" src="/image/wushuju.png"></image>
   <text>我的评价</text>

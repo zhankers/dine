@@ -1,4 +1,4 @@
-<view>
+<view class="swiper-container">
   <swiper indicator-dots="{{false}}" indicator-color="#a5e8d0" autoplay="true" circular="true">
     <block wx:for="{{banner}}" wx:key="banner">
       <swiper-item>
@@ -14,23 +14,6 @@
     <view bindtap='btnclick1' class="category-item">
       <image class="category-item-image" src="/image/scan.png" />
       <text class="category-item-text">扫码点餐</text>
-    </view>
-     <view bindtap='btnclick2' class="category-item">
-      <image class="category-item-image" src="/image/mall.png" />
-      <text class="category-item-text">菜单浏览</text>
-    </view>
-  </view>
-
-  <view class="category-panel2">
-    <view bindtap='btnclick3' class="category-item">
-      <image class="category-item-image" src="/image/news.png" />
-      <text class="category-item-text">饭店电话</text>
-    </view>
-    <view class="category-item">
-      <button class="kf_button" open-type="contact" session-from="weapp">
-        <image class="category-item-image1" src="/image/kf.png" />
-      </button>
-       <text class="category-item-text1">在线客服</text>
     </view>
   </view>
 </view>

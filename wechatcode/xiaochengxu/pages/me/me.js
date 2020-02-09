@@ -76,7 +76,11 @@ Page({
       url: '../myOrder/myOrder',
     })
   },
-
+  goToMyInfo:function(){
+    wx.navigateTo({
+      url: '../myInfo/myInfo',
+    })
+  },
   goToMyComment: function() {
     wx.navigateTo({
       url: '../mycomment/mycomment?type=1',

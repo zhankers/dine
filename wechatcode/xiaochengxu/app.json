@@ -8,7 +8,8 @@
     "pages/change/change",
     "pages/confirmOrder/confirmOrder",
     "pages/login/login",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/myInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
