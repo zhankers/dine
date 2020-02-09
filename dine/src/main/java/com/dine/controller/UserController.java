@@ -19,7 +19,7 @@ import com.dine.utils.JsonUtil;
 import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
 import com.dine.utils.ResultVOUtil;
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.NameValuePair;
@@ -74,7 +74,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/save")
-    public ResultVO create(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
+    public RestResponse create(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("参数不正确, userForm={}", userForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
@@ -98,7 +98,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserInfo")
-    public ResultVO getUserInfo(@RequestParam("openid") String openid) {
+    public RestResponse getUserInfo(@RequestParam("openid") String openid) {
         User user = repository.findByOpenid(openid);
         return ResultVOUtil.success(user);
     }
@@ -107,7 +107,7 @@ public class UserController {
      * 用户登录
      */
     @GetMapping("/login")
-    public ResultVO login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
+    public RestResponse login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
         log.info("username:{}, password:{}", username, password);
         Map<String, Object> result = new HashMap<>(16);
 
@@ -142,7 +142,7 @@ public class UserController {
      * 微信授权登录
      */
     @PostMapping("/wx-login")
-    public ResultVO wxAuthorization(@RequestBody @Valid UserForm userForm, HttpServletRequest request) {
+    public RestResponse wxAuthorization(@RequestBody @Valid UserForm userForm, HttpServletRequest request) {
         log.info("userForm:{}", userForm);
         Map<String, Object> result = new HashMap<>();
         String appId = userForm.getAppId();
@@ -219,14 +219,14 @@ public class UserController {
      * 用户登出
      */
     @GetMapping("/logout")
-    public ResultVO logout(HttpServletRequest request) {
+    public RestResponse logout(HttpServletRequest request) {
         SessionListener.removeSession(request.getSession());
         return ResultVOUtil.success();
     }
 
 
     @PostMapping("/register")
-    public ResultVO register(@RequestBody Map<String, String> map, HttpServletRequest request) {
+    public RestResponse register(@RequestBody Map<String, String> map, HttpServletRequest request) {
         String phone = map.get("username");
         String password = map.get("password");
         String confirmm = map.get("confirmm");
@@ -234,7 +234,7 @@ public class UserController {
 
         if (StringUtils.isEmpty(phone) || !Objects.equals(password, confirmm)) {
             log.error("两次密码不一致");
-            return ResultVO.error(2, "密码不匹配");
+            return RestResponse.error(2, "密码不匹配");
         }
         String url = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
         String avatarUrl = url + "/avatar/default.png";
@@ -250,13 +250,13 @@ public class UserController {
         user.setUpdateTime(new Date());
         User result = repository.save(user);
 
-        return ResultVO.success(result);
+        return RestResponse.success(result);
     }
 
     @PostMapping("/address")
-    public ResultVO addAddress(@RequestBody AddressForm addressForm ,BindingResult bindingResult,
-                               @RequestHeader("token") String token,
-                               HttpServletRequest request) {
+    public RestResponse addAddress(@RequestBody AddressForm addressForm , BindingResult bindingResult,
+                                   @RequestHeader("token") String token,
+                                   HttpServletRequest request) {
         log.info("addressForm: {} token: {}", addressForm, token);
 
         if (bindingResult.hasErrors()) {
@@ -290,11 +290,11 @@ public class UserController {
 
         address.setActive(1);
         address.setUserId(openid);
-        return ResultVO.success(addressRepository.saveAndFlush(address));
+        return RestResponse.success(addressRepository.saveAndFlush(address));
     }
 
     @GetMapping("/address")
-    public ResultVO getAddress(@RequestHeader("token") String token) {
+    public RestResponse getAddress(@RequestHeader("token") String token) {
         if (StringUtils.isEmpty(token)) {
             log.error("token is null");
             throw new SellException(ResultEnum.TOKEN_ILLEGAL);
@@ -302,9 +302,9 @@ public class UserController {
         String openid = JwtUtil.getUserId(token);
         List<Address> addresses = addressRepository.findByUserIdAndActive(openid, 1);
         if (CollectionUtils.isEmpty(addresses)) {
-            return ResultVO.success(null);
+            return RestResponse.success(null);
         }
-        return ResultVO.success(addresses.get(0));
+        return RestResponse.success(addresses.get(0));
     }
 
 }

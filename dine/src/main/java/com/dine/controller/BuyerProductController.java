@@ -2,7 +2,7 @@ package com.dine.controller;
 
 import com.dine.vo.ProductInfoVO;
 import com.dine.vo.ProductVO;
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.dine.entity.ProductCategory;
 import com.dine.entity.ProductInfo;
 import com.dine.service.CategoryService;
@@ -33,7 +33,7 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResultVO list() {
+    public RestResponse list() {
         //1. 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
 

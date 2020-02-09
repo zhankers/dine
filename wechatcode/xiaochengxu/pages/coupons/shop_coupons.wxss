@@ -1,0 +1,201 @@
+page {
+    background: #f3d660;
+}
+
+.no_coupons {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #e5e5e5;
+}
+
+.noe_coupons_img {
+    width: 500rpx;
+    height: 600rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #999;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.noe_coupons_img image {
+    width: 100%;
+}
+
+.deta {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0.3;
+    z-index: 10;
+}
+
+.butt {
+    position: relative;
+    z-index: 99;
+}
+
+.headimg {
+    width: 100vw;
+    height: 65vw;
+    margin-bottom: 30rpx;
+}
+
+.headimg image {
+    width: 100%;
+    height: 100%;
+}
+
+.lingqu {
+}
+
+.coupon-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 90%;
+    height: 180rpx;
+    margin: auto;
+    margin-bottom: 20rpx;
+}
+
+.item-left {
+    position: relative;
+    border-left: 7rpx dotted #e5e5e5;
+    display: inline-block;
+    width: 200rpx;
+    line-height: 180rpx;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ec6045;
+    background: #FFF;
+}
+
+.item-left::before {
+    content: " ";
+    position: absolute;
+    right: -20rpx;
+    top: -20rpx;
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: #f3d660;
+    z-index: 10;
+}
+
+.item-left::after {
+    content: " ";
+    position: absolute;
+    right: -20rpx;
+    bottom: -20rpx;
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: #f3d660;
+    z-index: 10;
+}
+
+.item-left .num {
+    font-size: 80rpx;
+}
+
+.label {
+    color: white;
+    background-color: #ec6045;
+    font-size: 20rpx;
+    transform: rotate(45deg);
+    width: 190rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 21rpx;
+    text-align: center;
+    line-height: 40rpx;
+    right: -61rpx;
+}
+
+.label2 {
+    color: white;
+    background-color: #4d96f1;
+    font-size: 20rpx;
+    transform: rotate(45deg);
+    width: 190rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 21rpx;
+    text-align: center;
+    line-height: 40rpx;
+    right: -61rpx;
+}
+
+.item-right {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 10rpx 20rpx 10rpx 40rpx;
+    box-sizing: border-box;
+    background: #fff;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.item-right text {
+    display: block;
+}
+
+.item-right text.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+}
+
+.item-right text.conditions {
+    font-size: 25rpx;
+    color: #999;
+    font-weight: lighter;
+}
+
+.item-right text.prefer {
+    font-size: 25rpx;
+    color: #333;
+    font-weight: lighter;
+}
+
+.item-right button {
+    position: absolute;
+    top: 50%;
+    right: 20rpx;
+    transform: translate(0,-50%);
+    display: inline-block;
+    padding: 5rpx;
+    line-height: 1.5;
+    font-size: 25rpx;
+    background: #fff;
+}
+
+.unreceive button {
+    color: #fff;
+    background: #ec6045;
+    border-radius: 50rpx;
+    width: 160rpx;
+    height: 50rpx;
+}
+
+.received button {
+    color: #4d96f1;
+    border: 1rpx solid #4d96f1;
+    border-radius: 50rpx;
+    width: 160rpx;
+    height: 50rpx;
+}

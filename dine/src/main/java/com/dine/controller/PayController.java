@@ -1,6 +1,6 @@
 package com.dine.controller;
 
-import com.dine.vo.ResultVO;
+import com.dine.vo.RestResponse;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.enums.ResultEnum;
@@ -32,7 +32,7 @@ public class PayController {
     private PayService payService;
 
     @GetMapping("/goPay")
-    public ResultVO<Boolean> goPay(@RequestParam("orderId") String orderId) {
+    public RestResponse<Boolean> goPay(@RequestParam("orderId") String orderId) {
         //1. 查询订单
         OrderDTO orderDTO = orderService.findOne(orderId);
         if (orderDTO == null) {
