@@ -4,7 +4,7 @@
   <view class="inforom">
     <picker class='gender' bindchange="changeSex" value="{{sexs}}" range="{{sexs}}">
       <view class="picker">
-        {{selfinfo.gender}}
+        {{sexs[selfinfo.gender]}}
       </view>
     </picker>
     <picker class='location' mode="region" bindchange="changeRegion" value="{{region}}" custom-item="{{customItem}}">
