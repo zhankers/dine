@@ -21,6 +21,16 @@
             </li>
             <li class="dropdown open lsm-sidebar-item">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  style="font-size: 18px;line-height:18px">
+                    <i class="fa fa-fw fa-plus"></i> 营销 <i class="my-icon lsm-sidebar-more"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="${springMacroRequestContext.contextPath}/seller/coupon/list">列表</a></li>
+                    <li><a href="${springMacroRequestContext.contextPath}/seller/coupon/index">新增</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown open lsm-sidebar-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  style="font-size: 18px;line-height:18px">
                     <i class="fa fa-fw fa-plus"></i> 类目 <i class="my-icon lsm-sidebar-more"></i></a>
                 <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header"></li>

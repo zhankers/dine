@@ -1,201 +1,180 @@
-page {
-    background: #f3d660;
-}
-
 .no_coupons {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background: #e5e5e5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #e5e5e5;
 }
 
 .noe_coupons_img {
-    width: 500rpx;
-    height: 600rpx;
-    text-align: center;
-    font-size: 32rpx;
-    color: #999;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  width: 500rpx;
+  height: 600rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .noe_coupons_img image {
-    width: 100%;
+  width: 100%;
 }
 
-.deta {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    opacity: 0.3;
-    z-index: 10;
+.aui-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  border: 1px solid #efefef;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 10rpx;
+  position: relative;
 }
 
-.butt {
-    position: relative;
-    z-index: 99;
+.aui-flex-box {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  height: 153rpx;
+  border-bottom: 1px dashed #eaeaea;
+  flex: 1;
+  min-width: 0;
+  padding: 20rpx 30rpx 20rpx 30rpx;
+  font-size: 28rpx;
+  color: #333;
 }
 
-.headimg {
-    width: 100vw;
-    height: 65vw;
-    margin-bottom: 30rpx;
+.aui-flex-box .couponName {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
 }
 
-.headimg image {
-    width: 100%;
-    height: 100%;
+.aui-flex-box .couponDate {
+  font-weight: normal;
+  font-size: 0.7rem;
+  margin-bottom: 20rpx;
+  color: #8a8a8c;
 }
 
-.lingqu {
+.tab-panel {
+  position: relative;
+  overflow: hidden;
 }
 
-.coupon-item {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 90%;
-    height: 180rpx;
-    margin: auto;
-    margin-bottom: 20rpx;
+.tab-panel .tab-panel-item {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
-.item-left {
-    position: relative;
-    border-left: 7rpx dotted #e5e5e5;
-    display: inline-block;
-    width: 200rpx;
-    line-height: 180rpx;
-    box-sizing: border-box;
-    text-align: center;
-    color: #ec6045;
-    background: #FFF;
+.tab-panel .tab-panel-item.tab-active {
+  position: relative;
+  -webkit-transition: -webkit-transform 0.15s;
+  transition: -webkit-transform 0.15s;
+  transition: transform 0.15s;
+  transition: transform 0.15s, -webkit-transform 0.15s;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 }
 
-.item-left::before {
-    content: " ";
-    position: absolute;
-    right: -20rpx;
-    top: -20rpx;
-    display: block;
-    width: 40rpx;
-    height: 40rpx;
-    border-radius: 50%;
-    background: #f3d660;
-    z-index: 10;
+.aui-price-nub {
+  background-image: -webkit-gradient(linear, left top, right top, from(#f63f5d), to(#ec2546));
+  background-image: -webkit-linear-gradient(left, #f63f5d, #ec2546);
+  background-image: -moz-linear-gradient(left, #f63f5d, #ec2546);
+  background-image: linear-gradient(to right, #f63f5d, #ec2546);
+  background-color: #ec2546;
+  height: 260rpx;
+  width: 180rpx;
+  border-radius: 6rpx 0 0 6rpx;
+  overflow: hidden;
 }
 
-.item-left::after {
-    content: " ";
-    position: absolute;
-    right: -20rpx;
-    bottom: -20rpx;
-    display: block;
-    width: 40rpx;
-    height: 40rpx;
-    border-radius: 50%;
-    background: #f3d660;
-    z-index: 10;
+.tab-panel-item .aui-flex {
+  height: 260rpx;
+  background: #fff;
+  margin: 60rpx 10rpx 0 10rpx;
+  border-radius: 6rpx;
+  border: 2rpx solid #efefef;
+  padding: 0;
+  -webkit-box-align: initial;
+  -webkit-align-items: initial;
+  align-items: initial;
+  position: relative;
 }
 
-.item-left .num {
-    font-size: 80rpx;
+.tab-panel-item .aui-flex:before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 73.999%;
+  left: -20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 100%;
+  background: #f6f6f6;
+  margin-top: -20rpx;
 }
 
-.label {
-    color: white;
-    background-color: #ec6045;
-    font-size: 20rpx;
-    transform: rotate(45deg);
-    width: 190rpx;
-    height: 40rpx;
-    position: absolute;
-    top: 21rpx;
-    text-align: center;
-    line-height: 40rpx;
-    right: -61rpx;
+.tab-panel-item .aui-flex:after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 73.999%;
+  right: -20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 100%;
+  background: #f6f6f6;
+  margin-top: -20rpx;
 }
 
-.label2 {
-    color: white;
-    background-color: #4d96f1;
-    font-size: 20rpx;
-    transform: rotate(45deg);
-    width: 190rpx;
-    height: 40rpx;
-    position: absolute;
-    top: 21rpx;
-    text-align: center;
-    line-height: 40rpx;
-    right: -61rpx;
+.aui-digit {
+  height: 192rpx;
+  line-height: 192rpx;
+  padding: 0 20rpx;
+  text-align: center;
 }
 
-.item-right {
-    position: relative;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    padding: 10rpx 20rpx 10rpx 40rpx;
-    box-sizing: border-box;
-    background: #fff;
-    vertical-align: top;
-    overflow: hidden;
+.aui-digit em {
+  font-style: normal;
+  font-size: 1rem;
+  color: #f3c1ca;
+  font-weight: normal;
 }
 
-.item-right text {
-    display: block;
+.aui-digit text {
+  font-style: normal;
+  font-size: 2rem;
+  color: #f3c1ca;
+  font-weight: normal;
 }
 
-.item-right text.name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 32rpx;
-    font-weight: bold;
-    color: #333;
+.aui-full {
+  background: #d01c39;
+  color: #f3c1ca;
+  padding-top: 8rpx;
+  line-height: 68rpx;
+  font-size: 26rpx;
+  text-align: center;
 }
 
-.item-right text.conditions {
-    font-size: 25rpx;
-    color: #999;
-    font-weight: lighter;
-}
-
-.item-right text.prefer {
-    font-size: 25rpx;
-    color: #333;
-    font-weight: lighter;
-}
-
-.item-right button {
-    position: absolute;
-    top: 50%;
-    right: 20rpx;
-    transform: translate(0,-50%);
-    display: inline-block;
-    padding: 5rpx;
-    line-height: 1.5;
-    font-size: 25rpx;
-    background: #fff;
-}
-
-.unreceive button {
-    color: #fff;
-    background: #ec6045;
-    border-radius: 50rpx;
-    width: 160rpx;
-    height: 50rpx;
-}
-
-.received button {
-    color: #4d96f1;
-    border: 1rpx solid #4d96f1;
-    border-radius: 50rpx;
-    width: 160rpx;
-    height: 50rpx;
+.tab-panel-item .aui-flex .aui-flex-box button {
+  background-image: -webkit-gradient(linear, left top, right top, from(#ef0f82), to(#fe1c44));
+  background-image: -webkit-linear-gradient(left, #ef0f82, #fe1c44);
+  background-image: -moz-linear-gradient(left, #ef0f82, #fe1c44);
+  background-image: linear-gradient(to right, #ef0f82, #fe1c44);
+  background-color: #ef0f82;
+  color: #fff;
+  border-radius: 100rpx;
+  border: none;
+  font-size: 20rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
 }
