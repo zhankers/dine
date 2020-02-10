@@ -19,13 +19,18 @@ public class Coupon {
     @Id
     @GeneratedValue
     private Long id;
-    private Long regionId;
+    /**
+     * 所属类型,1为满减
+     */
     private Integer type;
+    /**
+     * 优惠券名称
+     */
     private String name;
     /**
-     * 图片的URL地址
+     *
      */
-    private String img;
+    private Integer number;
     /**
      * 优惠券开始时间
      */

@@ -21,7 +21,7 @@ public class CouponReceive {
     @GeneratedValue
     private Long id;
 
-    private Long buyerId;
+    private String buyerId;
     /**
      * 优惠券编号
      */

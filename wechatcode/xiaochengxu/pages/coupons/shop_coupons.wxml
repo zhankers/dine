@@ -1,63 +1,39 @@
-<block wx:if="{{undraw==''&&unreceive==''}}">
+<block wx:if="{{unreceive==''}}">
   <view class="no_coupons">
     <view class="noe_coupons_img">
       <image mode="widthFix" src="/image/no_coupons.png"></image>\n 暂无可领取的优惠券\n</view>
   </view>
 </block>
-<block wx:if="{{undraw!=''||unreceive!=''}}">
+<block wx:if="{{unreceive!=''}}">
   <view class="lingqu font">
     <view class="headimg">
       <image src="/image/hyhq.png"></image>
     </view>
-    <block wx:for="{{unreceive}}" wx:key="{{item.value}}" wx:for-item="item">
-      <view class="coupon-item unreceive" id="{{item.id}}">
-        <view class="item-left">
-          <text class="num">{{item.preferential}}</text>
-          <text class="unit">元</text>
-        </view>
-        <view class="item-right">
-          <view bindtap="details" class="deta" id="{{item.id}}"></view>
-          <text class="name">{{item.store_name}}-{{item.name}}</text>
-          <block wx:if="{{item.conditions!=null}}">
-            <text class="conditions">满{{item.conditions}}可用</text>
-          </block>
-          <block wx:if="{{item.coupons_type==1}}">
-            <text class="conditions">外卖可用</text>
-          </block>
-          <block wx:if="{{item.coupons_type==2}}">
-            <text class="conditions">店内可用</text>
-          </block>
-          <block wx:if="{{item.coupons_type==3}}">
-            <text class="conditions">无使用要求</text>
-          </block>
-          <text class="prefer">{{item.start_time}}至{{item.end_time}}</text>
-          <button bindtap="receive" class="butt" data-index="{{index}}">领取优惠券</button>
-        </view>
+
+    <view class="tab-panel" style="margin-bottom:60rpx">
+      <view class="tab-panel-item tab-active">
+        <block wx:for="{{unreceive}}" wx:key="{{item.value}}" wx:for-item="item">
+          <view class="aui-flex">
+            <view class="aui-price-nub">
+              <view class="aui-digit">
+                <view>
+                  <em>￥</em>
+                  <text>{{item.money}}</text>
+                </view>
+              </view>
+              <view class="aui-full">
+                <view>满{{item.fullMoney}}元可用</view>
+              </view>
+            </view>
+            <view class="aui-flex-box">
+              <text class="couponName">满{{item.fullMoney}}减{{item.money}}优惠券</text>
+              <view class="couponDate">{{item.startTime}}~{{item.endTime}}</view>
+              <button data-id="{{item.id}}" bindtap="receive">领取</button>
+            </view>
+          </view>
+        </block>
       </view>
-    </block>
-    <block wx:for="{{undraw}}" wx:key="{{item.value}}" wx:for-item="item">
-      <view class="coupon-item unreceive" id="{{item.id}}">
-        <view class="item-left">
-          <text class="num">{{item.preferential}}</text>
-          <text class="unit">元</text>
-        </view>
-        <view class="item-right">
-          <view bindtap="detail" class="deta" id="{{item.id}}"></view>
-          <text class="name">{{item.store_name}}-{{item.name}}</text>
-          <text class="conditions">无门槛</text>
-          <block wx:if="{{item.voucher_type==1}}">
-            <text class="conditions">外卖可用</text>
-          </block>
-          <block wx:if="{{item.voucher_type==2}}">
-            <text class="conditions">店内可用</text>
-          </block>
-          <block wx:if="{{item.voucher_type==3}}">
-            <text class="conditions">无使用要求</text>
-          </block>
-          <text class="prefer">{{item.start_time}}至{{item.end_time}}</text>
-          <button bindtap="draws" class="butt" data-index="{{index}}">领取代金券</button>
-        </view>
-      </view>
-    </block>
+    </view>
+
   </view>
 </block>

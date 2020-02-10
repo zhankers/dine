@@ -1,107 +1,33 @@
-<block wx:if="{{coupon==''&&Vouchers==''||coupon==null&&Vouchers==null}}">
+<block wx:if="{{mineCoupon=='' || mineCoupon==null}}">
   <view class="no_coupons">
     <view class="noe_coupons_img">
       <image mode="widthFix" src="/image/no_coupons.png"></image>\n 暂无可用的优惠券\n</view>
   </view>
 </block>
-<view class=" fon">
-  <block wx:if="{{totalPrice!=0}}">
-    <view bindtap="select" class="not_user">
-      <text>不使用优惠券</text>
-      <view class="rel">
-        <image class="ab udlr" src="/image/mark.png"></image>
-      </view>
-    </view>
-  </block>
-  <block wx:for="{{coupon}}" wx:key="{{item.value}}" wx:for-item="item">
-    <view class="coupon-item unreceive" id="{{item.id}}">
-      <view class="item-left">
-        <text class="num">{{item.preferential}}</text>
-        <text class="unit">元</text>
-      </view>
-      <view class="item-right">
-        <view bindtap="details" class="deta" id="{{item.id}}"></view>
-        <text class="name">{{item.store_name}}-{{item.name}}</text>
-        <text class="conditions">满{{item.conditions}}可用</text>
-        <block wx:if="{{item.coupons_type==1}}">
-          <text class="conditions">外卖可用</text>
-        </block>
-        <block wx:if="{{item.coupons_type==2}}">
-          <text class="conditions">店内可用</text>
-        </block>
-        <block wx:if="{{item.coupons_type==3}}">
-          <text class="conditions">无使用要求</text>
-        </block>
-        <text class="prefer">{{item.start_time}}至{{item.end_time}}</text>
-        <view class="receive_one ab " data-id="{{index}}">
-          <block wx:if="{{states!=0}}">
-            <view class="butt">
-              <block wx:if="{{item.coupons_type==state||item.coupons_type==3}}">
-                <view>
-                  <block wx:if="{{item.conditions>totalPrice}}">
-                    <view class="none">无法使用</view>
-                  </block>
-                  <block wx:if="{{item.conditions<=totalPrice}}">
-                    <view bindtap="use" id="{{item.id}}">点击使用</view>
-                  </block>
-                </view>
-              </block>
-              <block wx:if="{{item.coupons_type!=state}}">
-                <view>
-                  <view class="none">无法使用</view>
-                </view>
-              </block>
+
+<block wx:if="{{mineCoupon!='' && mineCoupon!=null}}">
+  <view class="tab-panel" style="margin-bottom:60rpx">
+    <view class="tab-panel-item tab-active">
+      <block wx:for="{{mineCoupon}}" wx:key="{{item.value}}" wx:for-item="item">
+        <view class="aui-flex">
+          <view class="aui-price-nub">
+            <view class="aui-digit">
+              <view>
+                <em>￥</em>
+                <text>{{item.money}}</text>
+              </view>
             </view>
-          </block>
-          <block wx:if="{{states==0}}">
-            <view bindtap="tzsj" class="butt" data-sjid="{{item.store_id}}">点击使用</view>
-          </block>
-        </view>
-        <view class="label">优惠券</view>
-      </view>
-    </view>
-  </block>
-  <block wx:for="{{Vouchers}}" wx:key="{{item.value}}" wx:for-item="item">
-    <view class="coupon-item unreceive" id="{{item.id}}">
-      <view class="item-left">
-        <text class="num">{{item.preferential}}</text>
-        <text class="unit">元</text>
-      </view>
-      <view class="item-right">
-        <view bindtap="detail" class="deta" id="{{item.id}}"></view>
-        <text class="name">{{item.store_name}}-{{item.name}}</text>
-        <text class="conditions">无门槛</text>
-        <block wx:if="{{item.voucher_type==1}}">
-          <text class="conditions">外卖可用</text>
-        </block>
-        <block wx:if="{{item.voucher_type==2}}">
-          <text class="conditions">店内可用</text>
-        </block>
-        <block wx:if="{{item.voucher_type==3}}">
-          <text class="conditions">无使用要求</text>
-        </block>
-        <text class="prefer">{{item.start_time}}至{{item.end_time}}</text>
-        <view class="receive_one ab " data-id="{{index}}">
-          <block wx:if="{{states!=0}}">
-            <view class="butt">
-              <block wx:if="{{item.voucher_type==state||item.voucher_type==3}}">
-                <view>
-                  <view bindtap="user" id="{{item.id}}">点击使用</view>
-                </view>
-              </block>
-              <block wx:if="{{item.voucher_type!=state}}">
-                <view>
-                  <view class="none">无法使用</view>
-                </view>
-              </block>
+            <view class="aui-full">
+              <view>满{{item.fullMoney}}元可用</view>
             </view>
-          </block>
-          <block wx:if="{{states==0}}">
-            <view bindtap="tzsj" class="butt" data-sjid="{{item.store_id}}">点击使用</view>
-          </block>
+          </view>
+          <view class="aui-flex-box">
+            <text class="couponName">满{{item.fullMoney}}减{{item.money}}优惠券</text>
+            <view class="couponDate">{{item.startTime}}~{{item.endTime}}</view>
+            <button data-id="{{item.id}}" bindtap="gotoUse">去使用</button>
+          </view>
         </view>
-        <view class="label">代金券</view>
-      </view>
+      </block>
     </view>
-  </block>
-</view>
+  </view>
+</block>

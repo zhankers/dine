@@ -98,7 +98,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserInfo")
-    public RestResponse getUserInfo(@RequestParam("openid") String openid) {
+    public RestResponse getUserInfo2(@RequestParam("openid") String openid) {
         User user = repository.findByOpenid(openid);
         return ResultVOUtil.success(user);
     }
@@ -254,7 +254,7 @@ public class UserController {
     }
 
     @PostMapping("/address")
-    public RestResponse addAddress(@RequestBody AddressForm addressForm , BindingResult bindingResult,
+    public RestResponse addAddress(@RequestBody AddressForm addressForm, BindingResult bindingResult,
                                    @RequestHeader("token") String token,
                                    HttpServletRequest request) {
         log.info("addressForm: {} token: {}", addressForm, token);
@@ -305,6 +305,59 @@ public class UserController {
             return RestResponse.success(null);
         }
         return RestResponse.success(addresses.get(0));
+    }
+
+
+    @GetMapping("/info")
+    public RestResponse getUserInfo(@RequestHeader("token") String token) {
+        log.info("token: {}", token);
+        if (StringUtils.isEmpty(token)) {
+            log.error("token is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+        String openid = JwtUtil.getUserId(token);
+        User userInfo = repository.findByOpenid(openid);
+        return RestResponse.success(userInfo);
+    }
+
+    @PostMapping("/info")
+    public RestResponse modifyUserInfo(@RequestBody UserForm userForm, BindingResult bindingResult,
+                                       @RequestHeader("token") String token) {
+        log.info("token: {}", token);
+        if (StringUtils.isEmpty(token)) {
+            log.error("token is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+        String openid = JwtUtil.getUserId(token);
+        User userInfo = repository.findByOpenid(openid);
+        if (Objects.isNull(userInfo)) {
+            log.error("userInfo is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+
+        if (!StringUtils.isEmpty(userForm.getUsername())) {
+            userInfo.setUsername(userForm.getUsername());
+        }
+
+        if (!StringUtils.isEmpty(userForm.getGender())) {
+            userInfo.setGender(userForm.getGender());
+        }
+
+        if (!StringUtils.isEmpty(userForm.getCity())) {
+            userInfo.setCity(userForm.getCity());
+        }
+
+        if (!StringUtils.isEmpty(userForm.getCountry())) {
+            userInfo.setCountry(userForm.getCountry());
+        }
+
+        if (!StringUtils.isEmpty(userForm.getProvince())) {
+            userInfo.setProvince(userForm.getProvince());
+        }
+
+        userInfo.setUpdateTime(new Date());
+
+        return RestResponse.success(repository.saveAndFlush(userInfo));
     }
 
 }

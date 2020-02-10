@@ -2,9 +2,7 @@ package com.dine.form;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 public class CouponForm {
@@ -12,13 +10,16 @@ public class CouponForm {
     private Integer couponSendType;
     private Integer couponSettingType;
     private BigDecimal couponMoney;
+    private BigDecimal fullMoney;
     private Integer couponNumber;
 
-    private Date couponStartTime;
-    private Date couponEndTime;
-    private Date couponStartPeriod;
-    private Date couponEndPeriod;
+//    @JsonDeserialize(using=DateJsonDeserializer.class)
+//    @JsonSerialize(using = Date2StringSerializer.class)
+    private String couponStartTime;
+//    @JsonDeserialize(using=DateJsonDeserializer.class)
+//    @JsonSerialize(using = Date2StringSerializer.class)
+    private String couponEndTime;
+
     private String couponRemarks;
-    @NotBlank
-    private String leafClassId;
+
 }
