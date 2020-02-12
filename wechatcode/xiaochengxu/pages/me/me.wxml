@@ -1,5 +1,5 @@
 <!--pages/me/me.wxml-->
-<view class="header" wx:if="{{isShowUserName}}" bindtap='change'>
+<view class="header" wx:if="{{isShowUserName}}" bindtap='uploadImage'>
   <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
   <!-- <text class="userinfo-nickname">{{userInfo.realname?userInfo.realname:userInfo.nickName}}</text> -->
   <text class="userinfo-nickname">{{userInfo.username?userInfo.username:userInfo.nickName}}</text>

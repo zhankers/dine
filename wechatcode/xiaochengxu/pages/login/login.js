@@ -28,8 +28,8 @@ Page({
                 },
                 data: {
                   code: res.code,
-                  appId:'wx1623ec29f5ce660b',
-                  secret:'b99a508c1686e27a3de0b24dcaa063cf',
+                  appId:'',
+                  secret:'',
                   username: response.userInfo.nickName,
                   avatarUrl: response.userInfo.avatarUrl,
                   city: response.userInfo.city,

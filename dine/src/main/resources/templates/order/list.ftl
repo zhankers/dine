@@ -1,83 +1,104 @@
-<html>
-<#include "../common/header.ftl">
-
-<body>
-<div id="wrapper" class="toggled">
-
-    <#--边栏sidebar-->
-    <#include "../common/nav.ftl">
-
-    <#--主要内容content-->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <table class="table table-bordered table-condensed">
-                        <thead>
-                        <tr>
-                            <th>订单id</th>
-                            <th>姓名</th>
-                            <th>手机号</th>
-                            <th>地址</th>
-                            <th>金额</th>
-                            <th>订单状态</th>
-                            <#--<th>支付状态</th>-->
-                            <th>创建时间</th>
-                            <th colspan="2">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <#list orderDTOPage.content as orderDTO>
-                        <tr>
-                            <td>${orderDTO.orderId}</td>
-                            <td>${orderDTO.buyerName}</td>
-                            <td>${orderDTO.buyerPhone}</td>
-                            <td>${orderDTO.buyerAddress}</td>
-                            <td>${orderDTO.orderAmount}</td>
-                            <td>${orderDTO.getOrderStatusEnum().message}</td>
-                            <#--<td>${orderDTO.getPayStatusEnum().message}</td>-->
-                            <td>${orderDTO.createTime}</td>
-                            <td><a href="${springMacroRequestContext.contextPath}/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
-                            <td>
-                                <#if orderDTO.getOrderStatusEnum().message == "新订单">
-                                    <a href="${springMacroRequestContext.contextPath}/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
-                                </#if>
-                            </td>
-                        </tr>
-                        </#list>
-                        </tbody>
-                    </table>
+<#include "../common/common.ftl">
+<@contentWrapper>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <!-- Total Earnings -->
+        <!-- Recent Placed Orders< -->
+        <div class="col-12">
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Recently Placed Orders</h6>
                 </div>
+                <div class="ms-panel-body">
+                    <div class="table-responsive">
 
-            <#--分页-->
-                <div class="col-md-12 column">
-                    <ul class="pagination pull-right">
-                    <#if currentPage lte 1>
-                        <li class="disabled"><a href="#">上一页</a></li>
-                    <#else>
-                        <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
-                    </#if>
-
-                    <#list 1..orderDTOPage.getTotalPages() as index>
-                        <#if currentPage == index>
-                            <li class="disabled"><a href="#">${index}</a></li>
-                        <#else>
-                            <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${index}&size=${size}">${index}</a></li>
-                        </#if>
-                    </#list>
-
-                    <#if currentPage gte orderDTOPage.getTotalPages()>
-                        <li class="disabled"><a href="#">下一页</a></li>
-                    <#else>
-                        <li><a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
-                    </#if>
-                    </ul>
+                        <table class="table table-hover thead-primary">
+                            <thead>
+                            <tr>
+                                <th scope="col">订单id</th>
+                                <th scope="col">姓名</th>
+                                <th scope="col">手机号</th>
+                                <th scope="col">地址</th>
+                                <th scope="col">金额</th>
+                                <th scope="col">订单状态</th>
+                                <#--<th scope="col">支付状态</th>-->
+                                <th scope="col">创建时间</th>
+                                <th  scope="col" colspan="2">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list orderDTOPage.content as orderDTO>
+                                <tr>
+                                    <th scope="row">${orderDTO.orderId}</th>
+                                    <td>${orderDTO.buyerName}</td>
+                                    <td>${orderDTO.buyerPhone}</td>
+                                    <td>${orderDTO.buyerAddress}</td>
+                                    <td>${orderDTO.orderAmount}</td>
+                                    <td><span class="badge badge-primary">${orderDTO.getOrderStatusEnum().message}<span></td>
+                                    <#--<td>${orderDTO.getPayStatusEnum().message}</td>-->
+                                    <td>${orderDTO.createTime}</td>
+                                    <td><a href="${springMacroRequestContext.contextPath}/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
+                                    <td>
+                                        <#if orderDTO.getOrderStatusEnum().message == "新订单">
+                                            <a href="${springMacroRequestContext.contextPath}/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="data-table-6_info" role="status" aria-live="polite">
+                Showing ${currentPage} to ${orderDTOPage.getTotalPages()} of ${orderDTOPage.totalElements} entries
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="data-table-6_paginate">
+                <ul class="pagination has-gap">
+                    <#if currentPage lte 1>
+                        <li class="paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="#" aria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                        </li>
+                    <#else>
+                        <li class="paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage - 1}&size=${size}" a
+                               ria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                        </li>
+                    </#if>
 
+                    <#list 1..orderDTOPage.getTotalPages() as index>
+                        <#if currentPage == index>
+                            <li class="disabled paginate_button page-item ">
+                                <a href="#" aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
+                            </li>
+                        <#else>
+                            <li class="disabled paginate_button page-item ">
+                                <a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${index}&size=${size}"
+                                   aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
+                            </li>
+                        </#if>
+                    </#list>
+
+                    <#if currentPage gte orderDTOPage.getTotalPages()>
+                        <li class="disabled paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="#" aria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">下一页</a>
+                        </li>
+                    <#else>
+                        <li class="paginate_button page-item next disabled" id="data-table-6_next">
+                            <a href="${springMacroRequestContext.contextPath}/seller/order/list?page=${currentPage + 1}&size=${size}"
+                               aria-controls="data-table-6" data-dt-idx="5" tabindex="0" class="page-link">下一页</a>
+                        </li>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <#--弹窗-->
@@ -106,8 +127,6 @@
     <source src="${springMacroRequestContext.contextPath}/mp3/song.mp3" type="audio/mpeg" />
 </audio>
 
-<script src="${springMacroRequestContext.contextPath}/js/jquery.min.js"></script>
-<script src="${springMacroRequestContext.contextPath}/js/bootstrap.min.js"></script>
 <script>
     var websocket = null;
     if('WebSocket' in window) {
@@ -142,5 +161,4 @@
 
 </script>
 
-</body>
-</html>
+</@contentWrapper>

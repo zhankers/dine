@@ -25,6 +25,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,10 +42,11 @@ public class AdminUserController {
     @Autowired
     ProjectUrlConfig projectUrlConfig;
 
-    @GetMapping("/loginAdmin")
+    @PostMapping("/loginAdmin")
     public String loginAdmin(@RequestParam("phone") String phone,
                              @RequestParam("password") String password,
-                             HttpServletResponse response) {
+                             HttpServletRequest request,
+                             HttpServletResponse response) throws IOException {
         SellerInfo sellerInfo = repository.findByPhone(phone);
         log.info("商家信息={}", sellerInfo);
         if (sellerInfo != null && sellerInfo.getPassword().equals(password)) {
@@ -54,7 +56,8 @@ public class AdminUserController {
             Integer expire = RedisConstant.EXPIRE;
             //3. 设置token至cookie
             CookieUtil.set(response, CookieConstant.TOKEN, token, expire);
-            return "登录成功";
+            response.sendRedirect(request.getContextPath() + "/seller/order/list");
+            return "LOGIN SUCCESS";
         } else {
             throw new SellException(ResultEnum.LOGIN_FAIL);
         }

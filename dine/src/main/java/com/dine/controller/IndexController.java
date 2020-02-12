@@ -16,11 +16,16 @@ public class IndexController {
 
     @GetMapping("/test")
     public ModelAndView test() {
-        return new ModelAndView("common/nav2");
+        return new ModelAndView("index");
     }
 
     @GetMapping("/test2")
     public ModelAndView test2() {
-        return new ModelAndView("order/detail");
+        return new ModelAndView("common/common");
+    }
+
+    @GetMapping("/test3")
+    public ModelAndView test3() {
+        return new ModelAndView("product/index2");
     }
 }

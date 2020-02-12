@@ -360,4 +360,16 @@ public class UserController {
         return RestResponse.success(repository.saveAndFlush(userInfo));
     }
 
+    @PostMapping("/uploadImage")
+    public RestResponse uploadImage(@RequestHeader("token") String token) {
+
+        log.info("token: {}", token);
+        if (StringUtils.isEmpty(token)) {
+            log.error("token is null");
+            throw new SellException(ResultEnum.TOKEN_ILLEGAL);
+        }
+
+        return RestResponse.success();
+    }
+
 }

@@ -1,46 +1,91 @@
-<html>
-<#include "../common/header.ftl">
+<#include "../common/common.ftl">
+<@contentWrapper>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <!-- Total Earnings -->
+        <!-- Recent Placed Orders< -->
+        <div class="col-12">
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Recently Placed Orders</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <div class="table-responsive">
 
-<body>
-<div id="wrapper" class="toggled">
+                        <table class="table table-hover thead-primary">
+                            <thead>
+                            <tr>
+                                <th scope="col">图片id</th>
+                                <th scope="col">图片描述</th>
+                                <th scope="col">创建时间</th>
+                                <th scope="col">图片url</th>
+                                <th  scope="col" colspan="2">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#list categoryList as category>
+                            <tr>
+                                <td>${category.picId}</td>
+                                <td>${category.picMessage}</td>
+                                <td>${category.createTime}</td>
+                                <td>${category.picUrl}</td>
+                                <td><a href="${springMacroRequestContext.contextPath}/picture/index?picId=${category
+								.picId}">修改</a></td>
+                            </tr>
+							</#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <#--<div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="data-table-6_info" role="status" aria-live="polite">
+                Showing ${currentPage} to ${productInfoPage.getTotalPages()} of ${productInfoPage.totalElements} entries
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="data-table-6_paginate">
+                <ul class="pagination has-gap">
+                    <#if currentPage lte 1>
+                        <li class="paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="#" aria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                        </li>
+					<#else>
+                        <li class="paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="${springMacroRequestContext.contextPath}/seller/product/list?page=${currentPage - 1}&size=${size}" a
+                               ria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                        </li>
+					</#if>
 
-	<#--边栏sidebar-->
-	<#include "../common/nav.ftl">
+                    <#list 1..productInfoPage.getTotalPages() as index>
+						<#if currentPage == index>
+                            <li class="disabled paginate_button page-item ">
+                                <a href="#" aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
+                            </li>
+						<#else>
+                            <li class="disabled paginate_button page-item ">
+                                <a href="${springMacroRequestContext.contextPath}/seller/product/list?page=${index}&size=${size}"
+                                   aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
+                            </li>
+						</#if>
+					</#list>
 
-	<#--主要内容content-->
-	<div id="page-content-wrapper">
-		<div class="container-fluid">
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<table class="table table-bordered table-condensed">
-						<thead>
-						<tr>
-							<th>图片id</th>
-							<th>图片描述</th>
-							<th>创建时间</th>
-							<th>图片url</th>
-							<th>操作</th>
-						</tr>
-						</thead>
-						<tbody>
-
-						<#list categoryList as category>
-							<tr>
-								<td>${category.picId}</td>
-								<td>${category.picMessage}</td>
-								<td>${category.createTime}</td>
-								<td>${category.picUrl}</td>
-								<td><a href="${springMacroRequestContext.contextPath}/picture/index?picId=${category
-									.picId}">修改</a></td>
-							</tr>
-						</#list>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-
+                    <#if currentPage gte productInfoPage.getTotalPages()>
+                        <li class="disabled paginate_button page-item previous" id="data-table-6_previous">
+                            <a href="#" aria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">下一页</a>
+                        </li>
+					<#else>
+                        <li class="paginate_button page-item next disabled" id="data-table-6_next">
+                            <a href="${springMacroRequestContext.contextPath}/seller/product/list?page=${currentPage + 1}&size=${size}"
+                               aria-controls="data-table-6" data-dt-idx="5" tabindex="0" class="page-link">下一页</a>
+                        </li>
+					</#if>
+                </ul>
+            </div>
+        </div>
+    </div>-->
 </div>
-</body>
-</html>
+</@contentWrapper>
