@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Recently Placed Orders</h6>
+                    <h6>订单列表</h6>
                 </div>
                 <div class="ms-panel-body">
                     <div class="table-responsive">
@@ -130,7 +130,9 @@
 <script>
     var websocket = null;
     if('WebSocket' in window) {
-        websocket = new WebSocket('ws://localhost:8080/sell/webSocket');
+        var websocketUrl =  'ws://${webSocket_url}${ctx}/webSocket';
+        console.log("websocket url is " + websocketUrl);
+        websocket = new WebSocket(websocketUrl);
     }else {
         alert('该浏览器不支持websocket!');
     }

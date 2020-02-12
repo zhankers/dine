@@ -25,7 +25,7 @@ spring:
 
 #定义网址
 project-url:
-  sell: localhost:8080
+  websocket-url: zhanke.site:8080
   wechat-mp-authorize: https://api.weixin.qq.com/sns/jscode2session
 #  wechat-mp-authorize: https://api.weixin.qq.com/sns/oauth2/access_token
 wechat:

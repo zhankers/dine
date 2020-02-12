@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Recently Placed Orders</h6>
+                    <h6>轮播图</h6>
                 </div>
                 <div class="ms-panel-body">
                     <div class="table-responsive">
