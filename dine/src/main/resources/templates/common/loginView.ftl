@@ -14,7 +14,7 @@
                 <div class="ms-auth-form">
                     <form class="needs-validation" method="post" action="${springMacroRequestContext.contextPath}/admin/loginAdmin" novalidate="">
                         <h3>登录</h3>
-                        <#--<p>Please enter your telephone and password to continue</p>-->
+                        <p><#--Please enter your telephone and password to continue--></p>
                         <div class="mb-3">
                             <label for="login-username">手机号</label>
                             <div class="input-group">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label for="login-password">Password</label>
+                            <label for="login-password">密码</label>
                             <div class="input-group">
                                 <#--密码至少包含 数字和英文，长度6-20 ^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$-->
                                 <input type="password" class="form-control" id="login-password" name="password" placeholder="请输入密码" required="" pattern="^[0-9A-Za-z]{6,20}$">
