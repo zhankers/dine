@@ -51,6 +51,13 @@ public class ProductInfo {
 
     private Date updateTime;
 
+    /**
+     * 0：甜， 1酸 2苦 3辣 4咸
+     */
+    private Integer taste;
+
+    private Integer sales;
+
     @JsonIgnore
     public ProductStatusEnum getProductStatusEnum() {
         return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);

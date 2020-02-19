@@ -1,21 +1,18 @@
 package com.dine.controller;
 
-import com.dine.vo.RestResponse;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.service.OrderService;
 import com.dine.service.impl.PayService;
-import com.dine.utils.ResultVOUtil;
-
+import com.dine.vo.RestResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 支付
@@ -45,7 +42,7 @@ public class PayController {
             log.error("【取消订单】订单状态不正确,  orderStatus={}", orderDTO1.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
-        return ResultVOUtil.success(true);
+        return RestResponse.success(true);
     }
 
 

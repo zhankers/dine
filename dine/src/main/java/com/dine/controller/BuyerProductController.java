@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,9 +50,12 @@ public class BuyerProductController {
     private CouponService couponService;
 
     @GetMapping("/list")
-    public RestResponse list() {
+    public RestResponse list(@RequestParam(name = "productName", required = false) String productName,
+                             @RequestParam(name = "productPrice", required = false) String productPrice,
+                             @RequestParam(name = "taste", required = false) Integer taste,
+                             @RequestParam(name = "categoryType", required = false) Integer categoryType) {
         //1. 查询所有的上架商品
-        List<ProductInfo> productInfoList = productService.findUpAll();
+        List<ProductInfo> productInfoList = productService.findUpAllByConditions(productName, productPrice, taste, categoryType);
 
         //2. 查询类目(一次性查询)
 //        List<Integer> categoryTypeList = new ArrayList<>();
@@ -65,6 +70,9 @@ public class BuyerProductController {
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
         //3. 数据拼装
+
+
+
         List<ProductVO> productVOList = new ArrayList<>();
         for (ProductCategory productCategory: productCategoryList) {
             ProductVO productVO = new ProductVO();
@@ -79,6 +87,7 @@ public class BuyerProductController {
                     productInfoVOList.add(productInfoVO);
                 }
             }
+            productInfoVOList.sort(Comparator.comparing(ProductInfoVO::getSales).reversed());
             productVO.setProductInfoVOList(productInfoVOList);
             productVOList.add(productVO);
         }

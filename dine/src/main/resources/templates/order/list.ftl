@@ -34,7 +34,19 @@
                                     <td>${orderDTO.buyerPhone}</td>
                                     <td>${orderDTO.buyerAddress}</td>
                                     <td>${orderDTO.orderAmount}</td>
-                                    <td><span class="badge badge-primary">${orderDTO.getOrderStatusEnum().message}<span></td>
+                                    <td>
+                                        <#if orderDTO.getOrderStatusEnum().code == 0>
+                                            <span class="badge badge-warning">${orderDTO.getOrderStatusEnum().message}<span>
+                                        <#elseif orderDTO.getOrderStatusEnum().code == 1>
+                                            <span class="badge badge-success">${orderDTO.getOrderStatusEnum().message}<span>
+                                        <#elseif orderDTO.getOrderStatusEnum().code == 2>
+                                            <span class="badge badge-secondary">${orderDTO.getOrderStatusEnum().message}<span>
+                                        <#elseif orderDTO.getOrderStatusEnum().code == 3>
+                                            <span class="badge badge-primary">${orderDTO.getOrderStatusEnum().message}<span>
+                                        <#else>
+                                            <span class="badge badge-info">${orderDTO.getOrderStatusEnum().message}<span>
+                                        </#if>
+                                    </td>
                                     <#--<td>${orderDTO.getPayStatusEnum().message}</td>-->
                                     <td>${orderDTO.createTime}</td>
                                     <td><a href="${springMacroRequestContext.contextPath}/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>

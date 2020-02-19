@@ -27,11 +27,11 @@
 
                     <div class="form-group">
                         <label>生效时间</label>
-                        <input name="couponStartTime" type="text" class="form-control" value="${(coupon.startTime)!''}"/>
+                        <input id= "startTime" autocomplete="off" name="couponStartTime" type="text" class="form-control" value="${(coupon.startTime)!''}"/>
                     </div>
                     <div class="form-group">
                         <label>过期时间</label>
-                        <input name="couponEndTime" type="text" class="form-control" value="${(coupon.endTime)!''}"/>
+                        <input id= "endTime" autocomplete="off" name="couponEndTime" type="text" class="form-control" value="${(coupon.endTime)!''}"/>
                     </div>
 
 

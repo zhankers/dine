@@ -41,6 +41,15 @@
                                 </#list>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>口味</label>
+                        <select name="tasteType" class="form-control">
+                                <option value="0" selected>甜</option>
+                                <option value="1" >酸</option>
+                                <option value="2" >苦</option>
+                                <option value="3" >辣</option>
+                        </select>
+                    </div>
                     <input hidden type="text" name="productId" value="${(productInfo.productId)!''}">
                     <button type="submit" class="btn btn-default">提交</button>
                 </form>

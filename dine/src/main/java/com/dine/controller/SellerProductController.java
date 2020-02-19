@@ -139,6 +139,7 @@ public class SellerProductController {
                 form.setProductId(KeyUtil.genUniqueKey());
             }
             BeanUtils.copyProperties(form, productInfo);
+            productInfo.setTaste(form.getTasteType());
             productService.save(productInfo);
         } catch (SellException e) {
             map.put("msg", e.getMessage());

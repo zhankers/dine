@@ -28,4 +28,7 @@ public class ProductForm {
 
     /** 类目编号. */
     private Integer categoryType;
+
+    /** 口味 */
+    private Integer tasteType;
 }

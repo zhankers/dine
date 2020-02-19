@@ -1,17 +1,15 @@
 package com.dine.controller;
 
-import com.dine.vo.RestResponse;
+import com.dine.dto.OrderDTO;
 import com.dine.entity.Comment;
 import com.dine.entity.OrderMaster;
-import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.repository.CommentRepository;
 import com.dine.repository.OrderMasterRepository;
 import com.dine.service.OrderService;
-import com.dine.utils.ResultVOUtil;
-
+import com.dine.vo.RestResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -67,7 +65,7 @@ public class CommentController {
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         OrderMaster updateResult = masterRepository.save(orderMaster);
-        return ResultVOUtil.success(save);
+        return RestResponse.success(save);
     }
 
     /**
@@ -78,7 +76,7 @@ public class CommentController {
     @GetMapping("/commentList")
     public RestResponse<List<Comment>> commentList() {
         List<Comment> all = repository.findAll();
-        return ResultVOUtil.success(all);
+        return RestResponse.success(all);
     }
 
     /**
@@ -90,6 +88,6 @@ public class CommentController {
     @GetMapping("/userCommentList")
     public RestResponse<List<Comment>> userCommentList(@RequestParam("openid") String openid) {
         List<Comment> all = repository.findAllByOpenid(openid);
-        return ResultVOUtil.success(all);
+        return RestResponse.success(all);
     }
 }

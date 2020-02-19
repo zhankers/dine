@@ -22,6 +22,8 @@ public interface ProductService {
      */
     List<ProductInfo> findUpAll();
 
+    List<ProductInfo> findUpAllByConditions(String productName, String productPrice, Integer taste, Integer categoryType);
+
     Page<ProductInfo> findAll(Pageable pageable);
 
     ProductInfo save(ProductInfo productInfo);

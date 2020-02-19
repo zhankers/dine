@@ -23,3 +23,17 @@
   <script src="${springMacroRequestContext.contextPath}/js/framework.js"></script>
   <!-- Settings -->
   <script src="${springMacroRequestContext.contextPath}/js/settings.js"></script>
+  <script src="${springMacroRequestContext.contextPath}/js/laydate/laydate.js"></script>
+  <script>
+      //时间选择器
+      laydate.render({
+          elem: '#startTime',
+          theme: '#FF5722',
+          type: 'datetime'
+      });
+      laydate.render({
+          elem: '#endTime',
+          theme: '#FF5722',
+          type: 'datetime'
+      });
+  </script>

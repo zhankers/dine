@@ -1,13 +1,12 @@
 package com.dine.controller;
 
 import com.dine.config.ProjectUrlConfig;
-import com.dine.vo.RestResponse;
 import com.dine.entity.Picture;
 import com.dine.exception.SellException;
 import com.dine.form.PictureForm;
 import com.dine.repository.PictureRepository;
-import com.dine.utils.ResultVOUtil;
-
+import com.dine.vo.RestResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -18,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
-
-import javax.validation.Valid;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 轮播图
@@ -42,7 +38,7 @@ public class PictureController {
     @GetMapping("/getAll")
     public RestResponse getPictureInfo() {
         List<Picture> pictures = repository.findAll();
-        return ResultVOUtil.success(pictures);
+        return RestResponse.success(pictures);
     }
     /**
      * 页面相关

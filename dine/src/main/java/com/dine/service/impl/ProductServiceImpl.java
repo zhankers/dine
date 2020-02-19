@@ -1,7 +1,7 @@
 package com.dine.service.impl;
 
-import com.dine.entity.ProductInfo;
 import com.dine.dto.CartDTO;
+import com.dine.entity.ProductInfo;
 import com.dine.enums.ProductStatusEnum;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
@@ -11,9 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Predicate;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +42,48 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductInfo> findUpAll() {
         return repository.findByProductStatus(ProductStatusEnum.UP.getCode());
+    }
+
+    @Override
+    public List<ProductInfo> findUpAllByConditions(String productName, String productPrice, Integer taste, Integer categoryType) {
+
+        return repository.findAll((root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicatesList = new ArrayList<>();
+            //name模糊查询 ,like语句
+            if (!StringUtils.isEmpty(productName)) {
+                predicatesList.add(
+                        criteriaBuilder.and(
+                                criteriaBuilder.like(
+                                        root.get("productName"), "%" + productName + "%")));
+            }
+            // itemPrice 小于等于 <= 语句
+            if (!StringUtils.isEmpty(productPrice)) {
+                BigDecimal bigDecimal = new BigDecimal(productPrice);
+                predicatesList.add(
+                        criteriaBuilder.and(
+                                criteriaBuilder.le(
+                                        root.get("productPrice"), bigDecimal)));
+            }
+            //itemStock 大于等于 >= 语句
+            if (taste != null) {
+                predicatesList.add(
+                        criteriaBuilder.and(
+                                criteriaBuilder.equal(
+                                        root.get("taste"), taste)));
+            }
+
+            //itemStock 大于等于 >= 语句·
+            if (categoryType != null) {
+                predicatesList.add(
+                        criteriaBuilder.and(
+                                criteriaBuilder.equal(
+                                        root.get("categoryType"), categoryType)));
+            }
+
+            return criteriaBuilder.and(
+                    predicatesList.toArray(new Predicate[predicatesList.size()]));
+
+        }, Sort.by(Sort.Direction.ASC, "sales"));
     }
 
     @Override
@@ -77,12 +124,14 @@ public class ProductServiceImpl implements ProductService {
             }
 
             ProductInfo productInfo = opt.get();
-            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+            Integer productQuantity = cartDTO.getProductQuantity();
+            Integer result = productInfo.getProductStock() - productQuantity;
             if (result < 0) {
                 throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
-
             productInfo.setProductStock(result);
+            // 增加销量
+            productInfo.setSales(productInfo.getSales() + productQuantity);
 
             repository.save(productInfo);
         }

@@ -1,10 +1,9 @@
 package com.dine.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.math.BigDecimal;
-
-import lombok.Data;
 
 /**
  * 商品详情
@@ -30,4 +29,12 @@ public class ProductInfoVO {
 
     @JsonProperty("icon")
     private String productIcon;
+
+    @JsonProperty("taste")
+    private Integer taste;
+
+    @JsonProperty("sales")
+    private Integer sales;
+
+
 }

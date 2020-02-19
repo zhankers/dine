@@ -1,6 +1,5 @@
 package com.dine.controller;
 
-import com.dine.vo.RestResponse;
 import com.dine.converter.OrderForm2OrderDTOConverter;
 import com.dine.dto.OrderDTO;
 import com.dine.enums.ResultEnum;
@@ -8,8 +7,8 @@ import com.dine.exception.SellException;
 import com.dine.form.OrderForm;
 import com.dine.service.BuyerService;
 import com.dine.service.OrderService;
-import com.dine.utils.ResultVOUtil;
-
+import com.dine.vo.RestResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -20,14 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -67,7 +63,7 @@ public class BuyerOrderController {
         Map<String, String> map = new HashMap<>();
         map.put("orderId", createResult.getOrderId());
 
-        return ResultVOUtil.success(map);
+        return RestResponse.success(map);
     }
 
     /**
@@ -85,7 +81,7 @@ public class BuyerOrderController {
         }
 
         List<OrderDTO> orderList = buyerService.findOrderList(openid, orderStatus);
-        return ResultVOUtil.success(orderList);
+        return RestResponse.success(orderList);
     }
 
 
@@ -98,7 +94,7 @@ public class BuyerOrderController {
     @GetMapping("/detail")
     public RestResponse<OrderDTO> detail(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
-        return ResultVOUtil.success(orderDTO);
+        return RestResponse.success(orderDTO);
     }
 
     /**
@@ -111,7 +107,7 @@ public class BuyerOrderController {
     @PostMapping("/sure")
     public RestResponse sure(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
-        return ResultVOUtil.success();
+        return RestResponse.success();
     }
 
     /**
@@ -123,6 +119,6 @@ public class BuyerOrderController {
     @PostMapping("/cancel")
     public RestResponse cancel(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
-        return ResultVOUtil.success();
+        return RestResponse.success();
     }
 }

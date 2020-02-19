@@ -18,7 +18,6 @@ import com.dine.utils.HttpUtil;
 import com.dine.utils.JsonUtil;
 import com.dine.utils.JwtUtil;
 import com.dine.utils.KeyUtil;
-import com.dine.utils.ResultVOUtil;
 import com.dine.vo.RestResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
@@ -94,13 +93,13 @@ public class UserController {
         user.setPhone(userForm.getPhone());
         user.setZhuohao(userForm.getZhuohao());
         user.setRenshu(userForm.getRenshu());
-        return ResultVOUtil.success(repository.save(user));
+        return RestResponse.success(repository.save(user));
     }
 
     @GetMapping("/getUserInfo")
     public RestResponse getUserInfo2(@RequestParam("openid") String openid) {
         User user = repository.findByOpenid(openid);
-        return ResultVOUtil.success(user);
+        return RestResponse.success(user);
     }
 
     /**
@@ -135,7 +134,7 @@ public class UserController {
         result.put("token", user.getToken());
         result.put("userInfo", user);
         result.put("state", 1);
-        return ResultVOUtil.success(result);
+        return RestResponse.success(result);
     }
 
     /**
@@ -212,7 +211,7 @@ public class UserController {
         result.put("userInfo", user);
         result.put("state", 1);
 
-        return ResultVOUtil.success(result);
+        return RestResponse.success(result);
     }
 
     /**
@@ -221,7 +220,7 @@ public class UserController {
     @GetMapping("/logout")
     public RestResponse logout(HttpServletRequest request) {
         SessionListener.removeSession(request.getSession());
-        return ResultVOUtil.success();
+        return RestResponse.success();
     }
 
 
