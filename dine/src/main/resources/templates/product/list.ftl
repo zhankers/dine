@@ -78,11 +78,11 @@
 
                     <#list 1..productInfoPage.getTotalPages() as index>
                         <#if currentPage == index>
-                            <li class="disabled paginate_button page-item ">
+                            <li class="paginate_button page-item ">
                                 <a href="#" aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
                             </li>
                         <#else>
-                            <li class="disabled paginate_button page-item ">
+                            <li class="paginate_button page-item ">
                                 <a href="${springMacroRequestContext.contextPath}/seller/product/list?page=${index}&size=${size}"
                                    aria-controls="data-table-6" data-dt-idx="3" tabindex="0" class="page-link">${index}</a>
                             </li>
@@ -90,7 +90,7 @@
                     </#list>
 
                     <#if currentPage gte productInfoPage.getTotalPages()>
-                        <li class="disabled paginate_button page-item previous" id="data-table-6_previous">
+                        <li class="paginate_button page-item previous" id="data-table-6_previous">
                             <a href="#" aria-controls="data-table-6" data-dt-idx="0" tabindex="0" class="page-link">下一页</a>
                         </li>
                     <#else>

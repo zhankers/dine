@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -93,5 +94,16 @@ public class CouponServiceImpl implements CouponService {
             log.warn("coupon not exist");
             return -1L;
         }
+    }
+
+    @Override
+    public Long usesedCoupon(Long couponId, String userId) {
+        CouponReceive couponReceive = couponReceiveRepository.findByCouponIdAndBuyerId(couponId, userId);
+        if (Objects.nonNull(couponReceive)) {
+            couponReceive.setStatus(1);
+            couponReceiveRepository.saveAndFlush(couponReceive);
+            return couponId;
+        }
+        return null;
     }
 }

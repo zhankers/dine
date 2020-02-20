@@ -1,21 +1,22 @@
 package com.dine.service.impl;
 
 import com.dine.converter.OrderMaster2OrderDTOConverter;
+import com.dine.dto.CartDTO;
+import com.dine.dto.OrderDTO;
 import com.dine.entity.OrderDetail;
 import com.dine.entity.OrderMaster;
 import com.dine.entity.ProductInfo;
-import com.dine.dto.CartDTO;
-import com.dine.dto.OrderDTO;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.repository.OrderDetailRepository;
 import com.dine.repository.OrderMasterRepository;
+import com.dine.service.CouponService;
 import com.dine.service.OrderService;
 import com.dine.service.ProductService;
 import com.dine.service.WebSocket;
 import com.dine.utils.KeyUtil;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,10 +29,9 @@ import org.springframework.util.CollectionUtils;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -45,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    private CouponService couponService;
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
@@ -102,6 +105,11 @@ public class OrderServiceImpl implements OrderService {
                 new CartDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+
+        // 处理购物券
+        if (Objects.nonNull(orderDTO.getCouponId())) {
+            couponService.usesedCoupon(orderDTO.getCouponId(), orderDTO.getBuyerOpenid());
+        }
 
         //发送websocket消息
         webSocket.sendMessage(orderDTO.getOrderId());

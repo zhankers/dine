@@ -1,17 +1,16 @@
 package com.dine.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.dine.entity.OrderDetail;
 import com.dine.enums.OrderStatusEnum;
 import com.dine.utils.EnumUtil;
 import com.dine.utils.serializer.Date2StringSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import lombok.Data;
 
 /**
  */
@@ -60,6 +59,8 @@ public class OrderDTO {
     private Integer orderStatus;
 
     private String orderStatusStr;
+
+    private Long couponId;
 
     @JsonIgnore
     public String getOrderStatusStr(Integer orderStatus2) {

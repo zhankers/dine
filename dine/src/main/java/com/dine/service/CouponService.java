@@ -15,4 +15,6 @@ public interface CouponService {
     List<Coupon> findMineCoupon(String userId);
 
     Long receiveCoupon(Long couponId, String userId);
+
+    Long usesedCoupon(Long couponId, String userId);
 }
