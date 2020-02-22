@@ -33,10 +33,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<ProductInfo> findOne(String productId) {
-        ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(productId);
-        Example<ProductInfo> example = Example.of(productInfo);
-        return repository.findOne(example);
+
+        return repository.findById(productId);
     }
 
     @Override

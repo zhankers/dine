@@ -236,7 +236,7 @@ public class UserController {
             return RestResponse.error(2, "密码不匹配");
         }
         String url = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        String avatarUrl = url + "/avatar/default.png";
+        String avatarUrl = url + "/images/avatar/default.png";
         String userId = KeyUtil.genUUID();
 
         User user = new User();
