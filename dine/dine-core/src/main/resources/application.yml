@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /sell
+    context-path: /dine
   port: 8080
 
 
