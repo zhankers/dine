@@ -1,0 +1,7 @@
+这里的配置之所以和上篇的略有差别，是因为，
+
+1.本篇未使用AuthenticationProvider，用户名密码的校验由Spring自己完成，我们提供用户名密码的查询和密码的验证规则。
+
+2.TokenLoginFilter过滤器其实和上篇介绍的类似，如果是form表单提交，这个地方其实和上篇的一样，可以用AuthenticationProvider对用户名密码进行校验，只不过校验成功了之后，需要生成token并返回；但是这里是json数据，我们不能像上篇那样通过配置获取到用户名密码，因此需要用filter来获取。
+
+3.TokenAuthenticationFilter访问过滤器对每个请求进行过滤，拿到请求中的token,解析出用户，然后生成UsernamePasswordAuthenticationToken交给Springsecurity进行控制。
