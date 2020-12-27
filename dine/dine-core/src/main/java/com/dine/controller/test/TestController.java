@@ -37,12 +37,27 @@ public class TestController {
         return ResponseEntity.ok(serviceName);
     }
 
+    @GetMapping("/service{Name/v1")
+    public ResponseEntity test2(HttpServletRequest request) {
+
+        // System.out.println(one);
+
+        return ResponseEntity.ok("service{Name");
+    }
+
     public static void main(String[] args) {
         AntPathMatcher matcher = new AntPathMatcher();
         String requestPath = "/v1/dine/{uuid}/aa/{id}/bb";
         System.out.println(matcher.match(requestPath, "/v1/dine/123445/aa/77777/bb"));
         Map<String, String> result = matcher.extractUriTemplateVariables(requestPath, "/v1/dine/123445/aa/77777/bb");
         System.out.println(result);
+        String requestPath2 = "/v1/dine/{uuid}/aa/{id}/bb";
+        String s = requestPath2.replaceAll("\\{.*?\\}", ".*");
+        System.out.println(s);
+
+
+
+
     }
 
 }
