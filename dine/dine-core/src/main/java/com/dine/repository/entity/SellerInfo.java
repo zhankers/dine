@@ -1,15 +1,13 @@
 package com.dine.repository.entity;
 
+import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import lombok.Data;
+import java.util.Date;
 
 /**
  *
@@ -22,11 +20,15 @@ public class SellerInfo {
 
     @Id
     @GeneratedValue
-    private Integer sellerId;
+    private Long sellerId;
 
     private String username;
 
     private String password;
+
+    private String salt;
+
+    private String token;
 
     private String phone;
 

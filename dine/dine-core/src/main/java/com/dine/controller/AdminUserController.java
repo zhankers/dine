@@ -3,17 +3,16 @@ package com.dine.controller;
 import com.dine.config.ProjectUrlConfig;
 import com.dine.constant.CookieConstant;
 import com.dine.constant.RedisConstant;
-import com.dine.repository.entity.SellerInfo;
 import com.dine.enums.ResultEnum;
 import com.dine.exception.SellException;
 import com.dine.model.form.SellerForm;
 import com.dine.repository.SellerInfoRepository;
+import com.dine.repository.entity.SellerInfo;
 import com.dine.utils.CookieUtil;
 import com.dine.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -114,7 +113,7 @@ public class AdminUserController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "sellerId", required = false) Integer sellerId, Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "sellerId", required = false) Long sellerId, Map<String, Object> map) {
         SellerInfo sellerInfo = repository.findBySellerId(sellerId);
         map.put("category", sellerInfo);
 

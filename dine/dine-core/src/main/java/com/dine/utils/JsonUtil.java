@@ -7,8 +7,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -137,8 +135,8 @@ public class JsonUtil {
             node = MAPPER.readTree(body);
             JsonNode leaf = node.get(field);
             if (leaf != null) {
-                int value = leaf.asInt();
-                return (short) value;
+                Integer value = leaf.asInt();
+                return value.shortValue();
             }
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
@@ -152,9 +150,18 @@ public class JsonUtil {
             node = MAPPER.readTree(body);
             JsonNode leaf = node.get(field);
             if (leaf != null) {
-                int value = leaf.asInt();
-                return (byte) value;
+                Integer value = leaf.asInt();
+                return value.byteValue();
             }
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    public static <T> T parseObject(String json, Class<T> clazz) {
+        try {
+            return MAPPER.readValue(json, clazz);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
@@ -173,7 +180,7 @@ public class JsonUtil {
         return null;
     }
 
-    public static JsonNode toNode(String json) {
+    public static Object toNode(String json) {
         if (json == null) {
             return null;
         }
@@ -194,14 +201,6 @@ public class JsonUtil {
             logger.error(e.getMessage(), e);
         }
         return null;
-    }
-
-    public static ArrayNode createArrayNode() {
-        return MAPPER.createArrayNode();
-    }
-
-    public static ObjectNode createObjectNode() {
-        return MAPPER.createObjectNode();
     }
 
 }

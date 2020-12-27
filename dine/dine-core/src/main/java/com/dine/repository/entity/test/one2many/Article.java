@@ -1,5 +1,7 @@
 package com.dine.repository.entity.test.one2many;
 
+import lombok.Data;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+@Data
 @Table(name = "tbl_article")
 @Entity
 public class Article {

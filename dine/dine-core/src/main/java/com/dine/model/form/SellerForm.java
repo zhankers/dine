@@ -9,5 +9,5 @@ public class SellerForm {
     private String username;
     private String password;
     private String phone;
-    private Integer sellerId;
+    private Long sellerId;
 }
