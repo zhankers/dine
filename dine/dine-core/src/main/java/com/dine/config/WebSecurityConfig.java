@@ -1,6 +1,8 @@
 package com.dine.config;
 
 
+import com.dine.security.TokenLoginFilter;
+import com.dine.security.TokenLogoutHandler;
 import com.dine.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,22 +37,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf()
-//                .disable()
-//                .authorizeRequests()
-//                .antMatchers("/test/**").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/public/**").permitAll()
-//                .anyRequest().authenticated()
+        http.csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers("/test/**").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/public/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .logout().logoutUrl("/logout")
+                .addLogoutHandler(new TokenLogoutHandler(tokenManager))
+                .and()
+                .addFilter(new TokenLoginFilter(authenticationManager(), tokenManager))
+//                .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager))
+//                .exceptionHandling().authenticationEntryPoint(new UnauthorizedEntryPoint())
 //                .and()
-//                .logout().logoutUrl("/logout")
-//                .addLogoutHandler(new TokenLogoutHandler(tokenManager))
-//                .and()
-//                .addFilter(new TokenLoginFilter(authenticationManager(), tokenManager))
-////                .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager))
-////                .exceptionHandling().authenticationEntryPoint(new UnauthorizedEntryPoint())
-////                .and()
-//                .httpBasic();
+                .httpBasic();
     }
 
     @Override
